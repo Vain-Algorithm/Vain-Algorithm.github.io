@@ -7,14 +7,14 @@
   
   <title>我的第一篇博客 | Vain的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="博客  改变博客的命令先hexo cleanhexo ghexo d">
+  <meta name="description" content="Hexo 常用命令详解1:hexo inithexo init 命令用于初始化本地文件夹为网站的根目录 $ hexo init [folder]  folder 可选参数, 可以指定初始化目录的路径, 若无指定则默认当前目录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的第一篇博客">
 <meta property="og:url" content="https://vain-articles.github.io/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="Vain的博客">
-<meta property="og:description" content="博客  改变博客的命令先hexo cleanhexo ghexo d">
+<meta property="og:description" content="Hexo 常用命令详解1:hexo inithexo init 命令用于初始化本地文件夹为网站的根目录 $ hexo init [folder]  folder 可选参数, 可以指定初始化目录的路径, 若无指定则默认当前目录">
 <meta property="article:published_time" content="2020-04-17T15:04:07.663Z">
-<meta property="article:modified_time" content="2020-04-18T10:39:24.112Z">
+<meta property="article:modified_time" content="2020-04-18T11:31:36.730Z">
 <meta property="article:author" content="Vain">
 <meta name="twitter:card" content="summary">
   
@@ -91,30 +91,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>博客</strong></p>
-<hr>
-<p>改变博客的命令<br><strong>先hexo clean</strong><br><strong>hexo g</strong><br><strong>hexo d</strong></p>
+        <h1 id="Hexo-常用命令详解"><a href="#Hexo-常用命令详解" class="headerlink" title="Hexo 常用命令详解"></a>Hexo 常用命令详解</h1><h2 id="1-hexo-init"><a href="#1-hexo-init" class="headerlink" title="1:hexo init"></a>1:hexo init</h2><p><code>hexo init</code> 命令用于初始化本地文件夹为网站的根目录</p>
+<p><code>$ hexo init [folder]</code></p>
+<ul>
+<li><code>folder</code> 可选参数, 可以指定初始化目录的路径, 若无指定则默认当前目录</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="2-hexo-new"><a href="#2-hexo-new" class="headerlink" title="2:hexo new"></a>2:hexo new</h2><p><code>hexo new</code> 命令用于新建文章, 一般可以简写为 <code>hexo n</code><br><code>$ hexo new [layout] &lt;title&gt;</code></p>
+<ul>
+<li><code>layout</code> 可选参数, 用以指定文章类型, 若无指定则默认由配置文件中的 default_layout选项决定</li>
+<li><code>title</code> 必填参数，可以用以指定文章标题，如果参数中含有空格，则需要使用双引号包围</li>
+</ul>
+<h2 id="3-hexo-generate"><a href="#3-hexo-generate" class="headerlink" title="3:hexo generate"></a>3:hexo generate</h2><p><code>hexo generate</code> 命令用于生成静态文件, 一般可以简写为<code>hexo g</code><br><code>$ hexo generate</code><br>*<code>-d</code> 选项, 指定生成后部署，与<code>hexo d -g</code>等价</p>
+<h2 id="4-hexo-server"><a href="#4-hexo-server" class="headerlink" title="4:hexo server"></a>4:hexo server</h2><p><code>hexo server</code> 命令用于启动本地服务器, 一般可以简写为<code>hexo s</code><br><code>$ hexo server</code></p>
+<ul>
+<li><code>-p</code>选项，指定服务器端口, 默认为 4000</li>
+<li><code>-i</code>选项，指定服务器 IP 地址, 默认为 0.0.0.0</li>
+<li><code>-s</code>选项, 静态模式 , 仅提供 public 文件夹中的文件并禁用文件监视</li>
+</ul>
+<p><strong>说明:</strong> 运行服务器前需要安装 hexo-server 插件<br><code>$ npm install hexo-server --save</code></p>
+<h2 id="5-hexo-deploy"><a href="#5-hexo-deploy" class="headerlink" title="5:hexo deploy"></a>5:hexo deploy</h2><p><code>hexo deploy</code> 命令用于部署网站, 一般可以简写为 <code>hexo d</code></p>
+<p><code>$ hexo deploy</code></p>
+<h2 id="6-hexo-clean"><a href="#6-hexo-clean" class="headerlink" title="6:hexo clean"></a>6:hexo clean</h2><p><code>hexo clean</code> 命令用于清理缓存文件, 是一个比较常用的命令<br><strong>网站显示异常时可尝试此操作</strong></p>
+<h2 id="7-Option"><a href="#7-Option" class="headerlink" title="7: Option"></a>7: Option</h2><p><strong>(1) hexo –safe</strong><br><code>hexo --safe</code> 表示安全模式, 用于禁用加载插件和脚本<br><code>$ hexo --safe</code><br><strong>安装新插件时遇到问题可尝试此操作</strong><br><strong>(2) hexo –debug</strong><br><code>hexo --debug</code>  表示调试模式, 用于将消息详细记录到终端和<code>debug.log</code>文件<br><strong>(3)hexo –silent</strong><br><code>hexo --silent</code>  表示静默模式, 用于静默输出到终端<br><code>$ hexo --silent</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://vain-articles.github.io/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" data-id="ck95hp6j90001pwtwcmf81r7x" class="article-share-link">Share</a>
+      <a data-url="https://vain-articles.github.io/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" data-id="ck95jp3qh00007otw3s2kaenm" class="article-share-link">Share</a>
       
       
     </footer>
   </div>
   
     
-<nav id="article-nav">
-  
-  
-    <a href="/2020/04/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
-
   
 </article>
 
@@ -148,10 +159,6 @@
         
           <li>
             <a href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
-          </li>
-        
-          <li>
-            <a href="/2020/04/17/hello-world/">Hello World</a>
           </li>
         
       </ul>
