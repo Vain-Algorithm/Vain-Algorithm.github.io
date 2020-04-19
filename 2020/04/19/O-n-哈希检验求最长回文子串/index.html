@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>O(n)哈希检验求最长回文子串 | Vain的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Vain">
+  <meta name="keywords" content="">
+  <meta name="description" content="算法 C/C++ Python Linux Golang">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'hexo-theme-lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'null'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "greenish",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div class="single">
+
+<div id="page">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
+    <span>2020-04-19</span>
+    <h2>O(n)哈希检验求最长回...</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/ACM%E7%AE%97%E6%B3%95/" rel="tag">ACM算法</a></div>
+    </div>
+</div>
+</div>
+
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p><strong>求最长回文子串，大家公认的算法是Manacher，但是如果我们不想学习Mangacher，又想在 O(n) 的时间复杂度下解决该问题怎么办？</strong></p>
+<hr>
+<p><strong>哈希算法可以帮我们做到，而且容易理解，代码还很短</strong></p>
+<p><strong>举个栗子</strong><br>现在有字符串 <code>str=&quot;cbaaab&quot;</code>，我们要求它的回文子串，那么该怎么办呢？<br>这里我们借用<strong>Manacher</strong>算法里的一个思想，向原字符串里插字符，使得这个字符串为奇数个，这样方便我们统一处理。<br>我们在这个栗子中插入<code>&#39;#&#39;</code></p>
+<a id="more"></a>
+
+
+<p><strong>原字符:</strong><code>c b a a a b</code><br><strong>现字符:</strong><code># c # b # a # a # a # b #</code> </p>
+<hr>
+<p><strong>接下来:</strong></p>
+<ul>
+<li>先求出现字符串的正哈希</li>
+<li>在求出现字符串的逆哈希</li>
+<li>定义最长回文串半径</li>
+<li>枚举字符串中的点</li>
+<li>检验当前点的正哈希<code>[i-l,i]</code> 和 <code>[i+l,i]</code>是否相同</li>
+<li>若相同扩大半径，反则退出循环</li>
+<li>更新最大回文半径，记录<code>ans</code></li>
+<li>输出<code>ans-1</code>即可</li>
+</ul>
+<p><strong>推荐题目:</strong> <a href="https://www.acwing.com/problem/content/141/" target="_blank" rel="noopener">回文子串的最大长度</a></p>
+<p><strong>参考代码:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int inf &#x3D; 1 &lt;&lt; 30;</span><br><span class="line">const int maxn &#x3D; 2e6 + 5;</span><br><span class="line">typedef long long ll;</span><br><span class="line">&#x2F;&#x2F;const int N &#x3D; 5005;</span><br><span class="line">char s[maxn], str[maxn];</span><br><span class="line">typedef unsigned long long ull;</span><br><span class="line">ull h1[maxn], h2[maxn], p[maxn];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    ios::sync_with_stdio(false);</span><br><span class="line">    cin.tie(0);</span><br><span class="line">    int id &#x3D; 0;</span><br><span class="line">    while (cin &gt;&gt; (s + 1) &amp;&amp; s[1] !&#x3D; &#39;E&#39;)</span><br><span class="line">    &#123;</span><br><span class="line">        int n &#x3D; strlen(s + 1);</span><br><span class="line">        int t &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            str[++t] &#x3D; &#39;z&#39;;</span><br><span class="line">            str[++t] &#x3D; s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        str[++t] &#x3D; &#39;z&#39;;</span><br><span class="line">        p[0] &#x3D; 1ull;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; t; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            h1[i] &#x3D; h1[i - 1] * 131ull + str[i] - &#39;a&#39; + 1ull;</span><br><span class="line">            h2[t - i + 1] &#x3D; h2[t - i + 2] * 131ull + str[t - i + 1] - &#39;a&#39; + 1ull;</span><br><span class="line">            p[i] &#x3D; p[i - 1] * 131ull;</span><br><span class="line">        &#125;</span><br><span class="line">        int l, ans &#x3D; 0, j &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; t; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            l &#x3D; ans;</span><br><span class="line">            bool fla &#x3D; false;</span><br><span class="line">            while (h1[i] - h1[i - l] * p[l] &#x3D;&#x3D; h2[i] - h2[i + l] * p[l] &amp;&amp; i + l &lt;&#x3D; t &amp;&amp; i - l &gt;&#x3D; 1)</span><br><span class="line">                l++, fla &#x3D; true;</span><br><span class="line">            if (fla &amp;&amp; i + l &lt;&#x3D; t &amp;&amp; i - l &gt;&#x3D; 1)</span><br><span class="line">                --l;</span><br><span class="line">            ans &#x3D; max(l, ans);</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; &quot;Case &quot; &lt;&lt; ++id &lt;&lt; &quot;: &quot; &lt;&lt; ans - 1 &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>我的第一篇博客</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">Vain的博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button> 
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar.jpeg" alt="Vain"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Vain</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/guestbook/">Guestbook</a></li>
+        <li><a href="/about/">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+
+
+</body>
+</html>
