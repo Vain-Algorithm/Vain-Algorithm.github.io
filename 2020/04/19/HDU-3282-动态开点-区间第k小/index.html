@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content=#58b77a>
+  <title>HDU 3282 动态开点+区间第k小 | Vain的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="Vain">
+  <meta name="keywords" content="">
+  <meta name="description" content="算法 C/C++ Python Linux Golang">
+  <script id="hexo-configurations">
+  var CONFIG = {
+    root: '/',
+    theme: 'hexo-theme-lx',
+    version: '0.3.9',
+    localsearch:{
+      "enable": false,
+      "trigger": "auto",
+      "top_n_per_article": 1,
+      "unescape": false,
+      "preload": false
+      },
+    path: 'null'
+  };
+</script>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/css/main.min.css">
+  <style type="text/css">
+    pre,
+    code {
+      font-family: 'Fira Code', monospace;
+    }
+    html {
+      font-family: sans-serif;
+    }
+    body {
+      font-family: sans-serif;
+    }
+    h1, h2, h3, h4, h5, figure {
+      font-family: sans-serif;
+    }
+    .menu-container{
+      font-family: sans-serif;
+    }
+  </style>
+
+  <script src="//cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.jside.menu.js"></script>
+	<script>
+	$(document).ready(function(){
+	$(".menu-container").jSideMenu({
+	    jSidePosition: "position-right",
+	    jSideSticky: true,
+	    jSideSkin: "greenish",
+	     });
+	}); 
+	</script>
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Fira Code:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4/css/font-awesome.min.css">
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+<div class="single">
+
+<div id="page">
+<div id="lx-aside" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/post_cover.jpeg)" data-stellar-background-ratio="0.5">
+  <div class="overlay">
+  <div class="page-title">
+    <div class="avatar"><a href="/"><img src="/images/avatar.jpeg"></a></div>
+    <span>2020-04-19</span>
+    <h2>HDU 3282 动态开...</h2>
+    <div class="tags"><i class="fa fa-tag"></i><a class="tag-link" href="/tags/ACM%E7%AE%97%E6%B3%95/" rel="tag">ACM算法</a></div>
+    </div>
+</div>
+</div>
+
+<div id="lx-main-content">
+  <div class="lx-post">
+    <div class="lx-entry padding">
+      <div>
+        <p><strong>题意:</strong></p>
+<blockquote>
+<p>给n个数，把这n个数以此插入容器中，当插入的数量是奇数个时输出中位数</p>
+</blockquote>
+<a id="more"></a>
+<p><strong>样例:</strong></p>
+<p><strong>Sample Input</strong><br><code>3</code><br><code>1 9</code><br><code>1 2 3 4 5 6 7 8 9</code><br><code>2 9</code><br><code>9 8 7 6 5 4 3 2 1</code><br><code>3 23</code><br><code>23 41 13 22 -3 24 -31 -11 -8 -7</code><br><code>3 5 103 211 -311 -45 -67 -73 -81 -99</code><br><code>-33 24 56</code></p>
+<p><strong>Sample Output</strong><br><code>1 5</code><br><code>1 2 3 4 5</code><br><code>2 5</code><br><code>9 8 7 6 5</code><br><code>3 12</code><br><code>23 23 22 22 13 3 5 5 3 -3</code><br><code>-7 -3</code></p>
+<p><strong>吐槽:</strong></p>
+<blockquote>
+<p>今天有点事，没看来得及看这道题，其实就是询问整体区间第k小的板题</p>
+</blockquote>
+<hr>
+<p><strong>思路:</strong></p>
+<blockquote>
+<p>我没怎么看数据范围，直接用动态开点线段树写了，当然这题数据范围很小，<br>普通线段树也可以写，因为数据范围并不是很大，如果数据范围给到1e9，那也只能动态开点或者<br>离散化写了，这题主要考察权值线段树，我们可以统计权值，我们询问的值如果小于等于左儿子节点的权值，呢么<br>我们询问的值一定在左边，我们向左递归，反之减去左边权值向右递归</p>
+</blockquote>
+<p><strong>参考代码:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int inf &#x3D; 1 &lt;&lt; 30;</span><br><span class="line">const int maxn &#x3D; 1e6 + 5;</span><br><span class="line">typedef long long ll;</span><br><span class="line">const int N &#x3D; 1005;</span><br><span class="line">typedef unsigned long long ull;</span><br><span class="line">&#x2F;&#x2F;char s[maxn], str[maxn], s3[maxn];</span><br><span class="line">&#x2F;&#x2F;char s[N][N];</span><br><span class="line">&#x2F;&#x2F;ll da[maxn], dab[maxn], daba[maxn], sum[maxn];</span><br><span class="line">int a[maxn];</span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int ls, rs, sum;</span><br><span class="line">&#125; tr[maxn &lt;&lt; 1];</span><br><span class="line">int cnt;</span><br><span class="line">void inser(int &amp;k, int L, int R, int pos)</span><br><span class="line">&#123;</span><br><span class="line">    if (!k)</span><br><span class="line">        k &#x3D; ++cnt;</span><br><span class="line">    tr[k].sum++;</span><br><span class="line">    if (L &#x3D;&#x3D; R)</span><br><span class="line">    &#123;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid &#x3D; L + R &gt;&gt; 1;</span><br><span class="line">    if (mid &gt;&#x3D; pos)</span><br><span class="line">        inser(tr[k].ls, L, mid, pos);</span><br><span class="line">    else</span><br><span class="line">        inser(tr[k].rs, mid + 1, R, pos);</span><br><span class="line">&#125;</span><br><span class="line">int ask(int k, int L, int R, int ik)</span><br><span class="line">&#123;</span><br><span class="line">    if (L &#x3D;&#x3D; R)</span><br><span class="line">    &#123;</span><br><span class="line">        return L;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid &#x3D; L + R &gt;&gt; 1;</span><br><span class="line">    int sum &#x3D; tr[tr[k].ls].sum;</span><br><span class="line">    if (sum &gt;&#x3D; ik)</span><br><span class="line">        return ask(tr[k].ls, L, mid, ik);</span><br><span class="line">    else</span><br><span class="line">        return ask(tr[k].rs, mid + 1, R, ik - sum);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    ios::sync_with_stdio(false);</span><br><span class="line">    cin.tie(0);</span><br><span class="line">    int n, m, k;</span><br><span class="line">    int t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    while (t--)</span><br><span class="line">    &#123;</span><br><span class="line">        memset(a, 0, sizeof a);</span><br><span class="line">        memset(tr, 0, sizeof(tr));</span><br><span class="line">        cin &gt;&gt; m &gt;&gt; n;</span><br><span class="line">        k &#x3D; cnt &#x3D; 0;</span><br><span class="line">        int x, id &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 1; i &lt;&#x3D; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x;</span><br><span class="line">            inser(k, -inf, inf, x);</span><br><span class="line">            if (i &amp; 1)</span><br><span class="line">            &#123;</span><br><span class="line">                int pos &#x3D; (1 + i) &#x2F; 2;</span><br><span class="line">                a[id++] &#x3D; ask(k, -inf, inf, pos);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; m &lt;&lt; &#39; &#39; &lt;&lt; (n + 1) &#x2F; 2 ;</span><br><span class="line">        for (int i &#x3D; 0; i &lt;id; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (i % 10 &#x3D;&#x3D; 0)</span><br><span class="line">                cout &lt;&lt; endl;</span><br><span class="line">            if (i % 10 &#x3D;&#x3D; 0)</span><br><span class="line">                cout &lt;&lt; a[i];</span><br><span class="line">            else</span><br><span class="line">                cout &lt;&lt; &#39; &#39; &lt;&lt; a[i];</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="lx-navigation">
+	<div class="lx-cover prev lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-l.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="#">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Next</span>
+						<h3>No newer post</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+        <div class="lx-cover next lx-cover-sm" style="background-image: url(//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/images/footer-r.jpeg)">
+		<div class="overlay"></div>
+		<a class="copy" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/">
+			<div class="display-t">
+				<div class="display-tc">
+					<div>
+						<span>Prev</span>
+						<h3>ABA的个数</h3>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+</div>
+
+</div>
+
+<footer>
+  <div>
+  Copyright &copy; 2019.<a href="/">Vain的博客</a><br>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme <a href="https://lx.js.org" target="_blank">Lx</a><br>
+  </div>
+</footer>
+
+</div>
+
+<button class="hamburger hamburger--arrow-r" type="button">
+    <div class="hamburger-box">
+      <div class="hamburger-inner"></div>
+    </div>
+</button> 
+<div class="menu visibility">
+  <div class="menu-head">
+    <span class="layer">
+      <div class="col">
+        <div class="row for-pic">
+          <div class="profile-pic">
+            <a href="/"><img src="/images/avatar.jpeg" alt="Vain"/></a>
+          </div>
+        </div>
+        <div class="row for-name">
+          <p>Vain</p>
+          <span class="tagline">Hello, World!</span>
+        </div>
+      </div>
+    </span>
+  </div>
+  <nav class="menu-container">
+  <ul class="menu-items">
+    <li><a href="/"><i class="fa fa-home fa-fw"></i>Home</a></li>
+    <li><a href="/archives/"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+    
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-bookmark fa-fw"></i>Pages</span>
+        <ul>
+          <li><a href="/guestbook/">Guestbook</a></li>
+        <li><a href="/about/">About</a></li>
+        </ul>
+    </li>
+    <li class="has-sub"><span class="dropdown-heading">
+      <i class="fa fa-link fa-fw"></i>Friends</span>
+        <ul>
+          <li> <a href="https://lx.js.org" target="_blank">Theme-Lx</a></li>
+        </ul>
+    </li>
+  </ul>
+  </nav>
+</div>
+
+<div class="gototop js-top">
+  <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
+</div>
+<script src="//cdn.jsdelivr.net/npm/theme-lx@0.3.9/source/js/jquery.easing.min.js"></script>
+<script>
+(function () {
+	"use strict";
+	var goToTop = function() {
+		$(".js-gotop").on("click", function(event){
+			event.preventDefault();
+			$("html, body").animate({
+				scrollTop: $("html").offset().top
+			}, 500, "easeInOutExpo");
+			return false;
+		});
+		$(window).scroll(function(){
+			var $win = $(window);
+			if ($win.scrollTop() > 200) {
+				$(".js-top").addClass("active");
+			} else {
+				$(".js-top").removeClass("active");
+			}
+		});
+	};
+	$(function(){
+		goToTop();
+	});
+}());
+</script>
+
+
+</body>
+</html>
