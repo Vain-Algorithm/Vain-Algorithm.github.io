@@ -1,12 +1,282 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.0"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><meta name="keywords" content="[object Object]"><meta name="description" content="洛谷: 3369 (模板)普通平衡树题目描述:您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>线段树实现普通平衡树操作 | Vain的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="洛谷: 3369 (模板)普通平衡树题目描述:您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:  1.插入 xx 数 2.删除 xx 数(若有多个相同的数，因只删除一个) 3.查询 xx 数的排名(排名定义为比当前数小的数的个数 +1+1 ) 4.查询排名为 xx 的数 5.求 xx 的前驱(前驱定义为小于 xx，且最大的数) 6.求 xx 的后继(后继定义为大于 xx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线段树实现普通平衡树操作">
+<meta property="og:url" content="https://vain-articles.github.io/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="Vain的博客">
+<meta property="og:description" content="洛谷: 3369 (模板)普通平衡树题目描述:您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:  1.插入 xx 数 2.删除 xx 数(若有多个相同的数，因只删除一个) 3.查询 xx 数的排名(排名定义为比当前数小的数的个数 +1+1 ) 4.查询排名为 xx 的数 5.求 xx 的前驱(前驱定义为小于 xx，且最大的数) 6.求 xx 的后继(后继定义为大于 xx">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-24T02:25:20.000Z">
+<meta property="article:modified_time" content="2020-04-24T02:43:20.429Z">
+<meta property="article:author" content="Vain">
+<meta property="article:tag" content="ACM算法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternative" href="/atom.xml" title="Vain的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css">
 
-1.插入 xx 数
-2.删除 xx 数(若有多个相同的数，因只删除一个)
-3.查询 xx 数的排名(排名定义为比当前数小的数的个数 +1+1 )
-4.查询排名为 xx 的数
-5.求 xx 的前驱(前驱定义为小于 xx，且最大的数)
-6.求 xx 的后继(后继定义为大于 xx，且最小的数)"><meta name="author" content="Vain"><title>线段树实现普通平衡树操作 - Vain的博客</title><meta description="洛谷: 3369 (模板)普通平衡树题目描述:您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:  1.插入 xx 数 2.删除 xx 数(若有多个相同的数，因只删除一个) 3.查询 xx 数的排名(排名定义为比当前数小的数的个数 +1+1 ) 4.查询排名为 xx 的数 5.求 xx 的前驱(前驱定义为小于 xx，且最大的数) 6.求 xx 的后继(后继定义为大于 xx"><meta property="og:type" content="article"><meta property="og:title" content="线段树实现普通平衡树操作"><meta property="og:url" content="https://vain-articles.github.io/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/"><meta property="og:site_name" content="Vain"><meta property="og:description" content="洛谷: 3369 (模板)普通平衡树题目描述:您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:  1.插入 xx 数 2.删除 xx 数(若有多个相同的数，因只删除一个) 3.查询 xx 数的排名(排名定义为比当前数小的数的个数 +1+1 ) 4.查询排名为 xx 的数 5.求 xx 的前驱(前驱定义为小于 xx，且最大的数) 6.求 xx 的后继(后继定义为大于 xx"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2020-04-24T02:25:20.000Z"><meta property="article:modified_time" content="2020-04-24T02:43:20.429Z"><meta property="article:author" content="Vain"><meta property="article:tag" content="ACM算法"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://vain-articles.github.io/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://vain-articles.github.io/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/"},"headline":"线段树实现普通平衡树操作","image":["https://vain-articles.github.io/img/avatar.png"],"datePublished":"2020-04-24T02:25:20.000Z","dateModified":"2020-04-24T02:43:20.429Z","author":{"@type":"Person","name":"Vain"},"description":"洛谷: 3369 (模板)普通平衡树题目描述:您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:  1.插入 xx 数 2.删除 xx 数(若有多个相同的数，因只删除一个) 3.查询 xx 数的排名(排名定义为比当前数小的数的个数 +1+1 ) 4.查询排名为 xx 的数 5.求 xx 的前驱(前驱定义为小于 xx，且最大的数) 6.求 xx 的后继(后继定义为大于 xx"}</script><link rel="alternative" href="/atom.xml" title="Vain的博客" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><link rel="stylesheet" href="/css/style.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><link rel="stylesheet" href="/live2d/waifu.css"><script type="text/javascript" async src="/live2d/autoload.js"></script></head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="Vain的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/media">影音</a><a class="navbar-item" href="/album">相册</a><a class="navbar-item" href="/friend">友链</a><a class="navbar-item" href="/self-talking">碎碎念</a><a class="navbar-item" href="/message">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/removeif"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-04-24  <span class="level-item"><i class="far fa-clock"> </i>4 m  <i class="fas fa-pencil-alt"> </i>0.7 k</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div></div><h1 class="title is-3 is-size-4-mobile">线段树实现普通平衡树操作</h1><div class="content"><h1 id="洛谷-3369-模板-普通平衡树"><a href="#洛谷-3369-模板-普通平衡树" class="headerlink" title="洛谷: 3369 (模板)普通平衡树"></a>洛谷: 3369 (模板)普通平衡树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述:"></a>题目描述:</h2><p>您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:</p>
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: false,
+          isPost: true,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
+            
+            <img lazy-src="/img/head.jpg" class="js-avatar">
+            
+        </a>
+
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">Vain</a></h1>
+        </hgroup>
+
+        
+        <p class="header-subtitle">Vain学习(C/C++ acm算法 python Linux Golang)的个人网站</p>
+        
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
+                
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/ACM%E7%AE%97%E6%B3%95/" style="font-size: 10px;">ACM算法</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
+
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
+        </div>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">Vain</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">Vain</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">Vain学习(C/C++ acm算法 python Linux Golang)的个人网站</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap"><article id="post-线段树实现普通平衡树操作" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/" class="article-date">
+      <time datetime="2020-04-24T02:25:20.000Z" itemprop="datePublished">2020-04-24</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线段树实现普通平衡树操作
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+
+        
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM%E7%AE%97%E6%B3%95/" rel="tag">ACM算法</a></li></ul>
+    </div>
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <h1 id="洛谷-3369-模板-普通平衡树"><a href="#洛谷-3369-模板-普通平衡树" class="headerlink" title="洛谷: 3369 (模板)普通平衡树"></a>洛谷: 3369 (模板)普通平衡树</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述:"></a>题目描述:</h2><p>您需要写一种数据结构（可参考题目标题），来维护一些数，其中需要提供以下操作:</p>
 <ul>
 <li>1.插入 xx 数</li>
 <li>2.删除 xx 数(若有多个相同的数，因只删除一个)</li>
@@ -33,49 +303,311 @@
 </blockquote>
 <p><strong>参考代码:</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int inf &#x3D; (1 &lt;&lt; 30);</span><br><span class="line">typedef long long ll;</span><br><span class="line">const int maxn &#x3D; 1e5 + 5;</span><br><span class="line">struct node</span><br><span class="line">&#123;</span><br><span class="line">    int ls, rs, sum, lv, rv;</span><br><span class="line">&#125; tr[maxn * 50];</span><br><span class="line">int cnt;</span><br><span class="line">void pushup(int k)</span><br><span class="line">&#123;</span><br><span class="line">    tr[k].sum &#x3D; tr[tr[k].ls].sum + tr[tr[k].rs].sum;</span><br><span class="line">&#125;</span><br><span class="line">void inser(int &amp;k, int L, int R, int pos, int w)</span><br><span class="line">&#123;</span><br><span class="line">    if (!k)</span><br><span class="line">        k &#x3D; ++cnt;</span><br><span class="line">    if (L &#x3D;&#x3D; R)</span><br><span class="line">    &#123;</span><br><span class="line">        tr[k].sum +&#x3D; w;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid &#x3D; L + R &gt;&gt; 1;</span><br><span class="line">    if (mid &gt;&#x3D; pos)</span><br><span class="line">        inser(tr[k].ls, L, mid, pos, w);</span><br><span class="line">    else</span><br><span class="line">        inser(tr[k].rs, mid + 1, R, pos, w);</span><br><span class="line">    pushup(k);</span><br><span class="line">&#125;</span><br><span class="line">int asik(int k, int L, int R, int ik)</span><br><span class="line">&#123;</span><br><span class="line">    if (L &#x3D;&#x3D; R)</span><br><span class="line">        return L;</span><br><span class="line">    int mid &#x3D; L + R &gt;&gt; 1;</span><br><span class="line">    if (tr[tr[k].ls].sum &gt;&#x3D; ik)</span><br><span class="line">        return asik(tr[k].ls, L, mid, ik);</span><br><span class="line">    else</span><br><span class="line">        return asik(tr[k].rs, mid + 1, R, ik - tr[tr[k].ls].sum);</span><br><span class="line">&#125;</span><br><span class="line">int ask(int k, int L, int R, int ql, int qr)</span><br><span class="line">&#123;</span><br><span class="line">    if (L &gt;&#x3D; ql &amp;&amp; R &lt;&#x3D; qr)</span><br><span class="line">    &#123;</span><br><span class="line">        return tr[k].sum;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid &#x3D; L + R &gt;&gt; 1;</span><br><span class="line">    int ans &#x3D; 0;</span><br><span class="line">    if (ql &lt;&#x3D; mid)</span><br><span class="line">        ans +&#x3D; ask(tr[k].ls, L, mid, ql, qr);</span><br><span class="line">    if (qr &gt; mid)</span><br><span class="line">        ans +&#x3D; ask(tr[k].rs, mid + 1, R, ql, qr);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line">map&lt;int,int&gt;mp;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    ios::sync_with_stdio(false);</span><br><span class="line">    cin.tie(0);</span><br><span class="line">    int n, k &#x3D; 0;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    while (n--)</span><br><span class="line">    &#123;</span><br><span class="line">        int op, x;</span><br><span class="line">        cin &gt;&gt; op &gt;&gt; x;</span><br><span class="line">        if (op &#x3D;&#x3D; 1)</span><br><span class="line">            inser(k, -inf, inf, x, 1),mp[x]++;</span><br><span class="line">        if (op &#x3D;&#x3D; 2)</span><br><span class="line">            inser(k, -inf, inf, x, -1),mp[x]--;</span><br><span class="line">        if (op &#x3D;&#x3D; 3)</span><br><span class="line">        &#123;</span><br><span class="line">           </span><br><span class="line">            inser(k, -inf, inf, x, 1),mp[x]++;</span><br><span class="line">            int l &#x3D; asik(k, -inf, inf, 1);</span><br><span class="line">            cout &lt;&lt; ask(k, -inf, inf, l, x)-mp[x]+1&lt;&lt; endl;</span><br><span class="line">            inser(k,-inf,inf,x,-1),mp[x]--;</span><br><span class="line">        &#125;</span><br><span class="line">        if (op &#x3D;&#x3D; 4)</span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; asik(k, -inf, inf, x) &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        if (op &#x3D;&#x3D; 5)</span><br><span class="line">        &#123;</span><br><span class="line">            inser(k, -inf, inf, x, 1),mp[x]++;</span><br><span class="line">            int l &#x3D; asik(k, -inf, inf, 1);</span><br><span class="line">            int ans &#x3D; ask(k, -inf, inf, l, x);</span><br><span class="line">            cout &lt;&lt; asik(k, -inf, inf, ans - mp[x]) &lt;&lt; endl;</span><br><span class="line">            inser(k, -inf, inf, x, -1),mp[x]--;</span><br><span class="line">        &#125;</span><br><span class="line">        if (op &#x3D;&#x3D; 6)</span><br><span class="line">        &#123;</span><br><span class="line">            inser(k, -inf, inf, x, 1);</span><br><span class="line">            int l &#x3D; asik(k, -inf, inf, 1);</span><br><span class="line">            int ans &#x3D; ask(k, -inf, inf, l, x);</span><br><span class="line">            cout &lt;&lt; asik(k, -inf, inf, ans+1) &lt;&lt; endl;</span><br><span class="line">            inser(k, -inf, inf, x, -1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</div><ul class="post-copyright"><li><strong>Post Title: </strong><a href="https://Vain-articles.github.io/2020/04/24/线段树实现普通平衡树操作/">线段树实现普通平衡树操作</a></li><li><strong>Post Author: </strong><a href="https://Vain-articles.github.io">Vain</a></li><li><strong>Post Link: </strong><a href="https://Vain-articles.github.io/2020/04/24/线段树实现普通平衡树操作/">https://Vain-articles.github.io/2020/04/24/线段树实现普通平衡树操作/</a></li><li><strong>Copyright Notice: </strong><span>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></li></ul><div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># Related Post</span><br><span>  1.<a class="is-size-6" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/" target="_blank">替罪羊树模板</a><br></span><span>  2.<a class="is-size-6" href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/" target="_blank">leecode 切分数组</a><br></span><span>  3.<a class="is-size-6" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/" target="_blank">可持久化数组</a><br></span><span>  4.<a class="is-size-6" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/" target="_blank">浅谈主席树</a><br></span><span>  5.<a class="is-size-6" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/" target="_blank">HDU 3282 动态开点+区间第k小</a><br></span><span>  6.<a class="is-size-6" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/" target="_blank">ABA的个数</a><br></span><span>  7.<a class="is-size-6" href="/2020/04/19/O-n-%E5%93%88%E5%B8%8C%E6%A3%80%E9%AA%8C%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/" target="_blank">O(n)哈希检验求最长回文子串</a><br></span><span>  8.<a class="is-size-6" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" target="_blank">我的第一篇博客</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135456.png" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135550.png" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">浅谈主席树</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/"><span class="level-item">HDU 3282 动态开点+区间第k小</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><!--!--><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/avatar.png" alt="Vain"></figure><p class="title is-size-4 is-block line-height-inherit">Vain</p><p class="is-size-6 is-block">千里之行，始于足下</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tag</p><a href="/tags"><p class="title">1</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Vain-Algorithm/Vain-Algorithm.github.io" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/removeif"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/3050419984"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:removeif@163.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Next" href="https://vain-algorithm.github.io/"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
-                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
-                                if(data){
-                                    $('#hitokoto').html("");
-                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
-                                    "<p>"+"From《"+data.from+"》</p><p>Provider-"+data.creator+"</p>");
-                                }});}
-                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">Recent</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-01T15:44:25.000Z">2020-05-01</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/">替罪羊树模板</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-04-29T04:37:47.000Z">2020-04-29</time></p><p class="title is-6"><a class="link-muted" href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-04-24T10:10:18.000Z">2020-04-24</time></p><p class="title is-6"><a class="link-muted" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/">可持久化数组</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-04-24T04:52:37.000Z">2020-04-24</time></p><p class="title is-6"><a class="link-muted" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/">浅谈主席树</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-04-24T02:25:20.000Z">2020-04-24</time></p><p class="title is-6"><a class="link-muted" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></p><p class="is-uppercase"></p></div></article></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">May 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/04/"><span class="level-start"><span class="level-item">April 2020</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/ACM%E7%AE%97%E6%B3%95/"><span class="tag">ACM算法</span><span class="tag is-grey-lightest">8</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe to Updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=removeifFeedsId&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="removeifFeedsId" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div><p class="help">输入邮箱开始订阅，更博后邮件通知！</p></form></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="Vain的博客" height="28"></a><p class="size-small"><span>&copy; 2020 Vain</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>,Modify by <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">removeif</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请<a href="/message" target="_blank">留言</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
-            var n = new Date(time);
-            now.setTime(now.getTime() + 250),
-                days = (now - n) / 1e3 / 60 / 60 / 24,
-                dnum = Math.floor(days),
-                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
-                hnum = Math.floor(hours),
-            1 == String(hnum).length && (hnum = "0" + hnum),
-                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
-                mnum = Math.floor(minutes),
-            1 == String(mnum).length && (mnum = "0" + mnum),
-                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
-                snum = Math.round(seconds),
-            1 == String(snum).length && (snum = "0" + snum),
-                document.getElementById("statistic-times").innerHTML = "❤️Site from <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> has existed <strong>" + dnum + "</strong> d <strong>" + hnum + "</strong> h <strong>" + mnum + "</strong> m <strong>" + snum + "</strong> s！❤️";
-        }var now = new Date();setInterval("createTime('2018/11/11 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️Thx <strong><span id="busuanzi_value_site_uv">99+</span></strong> users <strong><span id="busuanzi_value_site_pv">99+</span></strong> visited！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/removeif"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="2364053447" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            site: {
-                url: 'https://Vain-articles.github.io',
-                external_link: {"enable":true,"exclude":[]}
-            },
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
+
+      
+      
+        <div class="page-reward">
+          <p><a href="javascript:void(0)" onclick="dashangToggle()" class="dashang">赏</a></p>
+          <div class="hide_box"></div>
+          <div class="shang_box">
+            <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()">×</a>
+            <div class="shang_tit">
+              <p>纯属好玩</p>
+            </div>
+            <div class="shang_payimg">
+              <img src="/img/alipayimg.jpg" alt="扫码支持" title="扫一扫" />
+            </div>
+              <div class="pay_explain">扫码打赏，你说多少就多少</div>
+            <div class="shang_payselect">
+              
+                <div class="pay_item checked" data-id="alipay">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/alipay.png" alt="支付宝" /></span>
+                </div>
+              
+              
+                <div class="pay_item" data-id="wechat">
+                  <span class="radiobox"></span>
+                  <span class="pay_logo"><img src="/img/weixin.png" alt="微信" /></span>
+                </div>
+              
+            </div>
+            <div class="shang_info">
+              <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+            </div>
+          </div>
+        </div>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+        <script type="text/javascript">
+          $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","/img/"+dataid+"img.jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+          });
+          function dashangToggle(){
+            
+            $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+          }
+        </script>
+      
+    </div>
+    
+  </div>
+  
+    
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 Vain 的个人博客">Vain</a></p>
+        <p><span>发布时间:</span>2020年04月24日 - 10时25分</p>
+        <p><span>最后更新:</span>2020年04月24日 - 10时43分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/" title="线段树实现普通平衡树操作">https://vain-articles.github.io/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://vain-articles.github.io/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/　　作者: Vain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" target="_blank" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 转载请保留原文链接及作者。
+        </p>
+    </div>
+
+
+
+<nav id="article-nav">
+  
+    <a href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          浅谈主席树
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HDU 3282 动态开点+区间第k小</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#洛谷-3369-模板-普通平衡树"><span class="toc-number">1.</span> <span class="toc-text">洛谷: 3369 (模板)普通平衡树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目描述"><span class="toc-number">1.1.</span> <span class="toc-text">题目描述:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入格式"><span class="toc-number">1.2.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输出格式"><span class="toc-number">1.3.</span> <span class="toc-text">输出格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#输入输出样例"><span class="toc-number">1.4.</span> <span class="toc-text">输入输出样例</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
+
+
+
+<div class="bdsharebuttonbox">
+	<a href="#" class="fx fa-weibo bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+	<a href="#" class="fx fa-weixin bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+	<a href="#" class="fx fa-qq bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+	<a href="#" class="fx fa-facebook-official bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+	<a href="#" class="fx fa-twitter bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+	<a href="#" class="fx fa-linkedin bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a>
+	<a href="#" class="fx fa-files-o bds_copy" data-cmd="copy" title="分享到复制网址"></a>
+</div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+
+
+
+    
+        <div id="gitments"></div>
+<script src="/js/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname,
+      owner: 'luuman',
+      repo: 'luuman.github.io',
+      oauth: {
+        client_id: '',
+        client_secret: '',
+      },
+    })
+    gitment.render('gitments')
+</script>
+    
+
+
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/" title="上一篇: 浅谈主席树">
+                <i class="fa fa-angle-left"></i>
+            </a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/" title="下一篇: HDU 3282 动态开点+区间第k小">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/">替罪羊树模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/">可持久化数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/">浅谈主席树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/">HDU 3282 动态开点+区间第k小</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/">ABA的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/O-n-%E5%93%88%E5%B8%8C%E6%A3%80%E9%AA%8C%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">O(n)哈希检验求最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
             }
-        };</script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back-to-top.js" defer></script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><!--!--><!--!--><!--!--><script src="/js/toc.js" defer></script><script src="/js/main.js" defer></script><link rel="stylesheet" href="/css/insight.css"><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Type something..."><span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"></div></div></div></div><script>(function (window) {
-            var INSIGHT_CONFIG = {
-                TRANSLATION: {
-                    POSTS: 'Posts',
-                    PAGES: 'Pages',
-                    CATEGORIES: 'Categories',
-                    TAGS: 'Tags',
-                    UNTITLED: '(Untitled)',
-                },
-                CONTENT_URL: '/content.json',
-            };
-            window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-        })(window);</script><script src="/js/insight.js" defer></script></body></html>
+            else {
+            }
+        })
+    </script>
+
+
+
+    <script>
+        
+    </script>
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2020 Vain
+            </div>
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
+        </div>
+        
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
+        
+    </div>
+</footer>
+
+    </div>
+    
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+<script src="/js/main.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
+
+
+
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
+</div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
+
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
+</script>
+
+
+   <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+  </div>
+</body>
+</html>
