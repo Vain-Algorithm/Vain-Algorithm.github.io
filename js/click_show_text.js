@@ -2,7 +2,7 @@ var a_idx = 0;
 jQuery(document).ready(function($) {
     $("body").click(function(e) {
         var a = new Array
-        (" 爱梦娜 ", "      喜欢梦娜", "   梦娜最重要","   我才不是大猪蹄子 ", "   好好学习  ");
+        (" 懒癌患者", "  射手", "  三井寿"," Acmer   ", "   好好学习  ");
         var $i = $("<span/>").text(a[a_idx]);
         a_idx = (a_idx + 1) % a.length;
         var x = e.pageX,
