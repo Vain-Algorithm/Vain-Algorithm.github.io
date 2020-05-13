@@ -4,19 +4,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>leecode 切分数组 | Vain的博客</title>
+  <title>leetcode 百刷1:--两数相加 | Vain的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="dp + 筛最小素因子 + 枚举最小素因子切分数组:  给定一个整数数组 nums ，小李想将 nums 切割成若干个非空子数组，使得每个子数组最左边的数和最右边的数的最大公约数大于 1 。为了减少他的工作量，请求出最少可以切成多少个子数组。示例 1：输入：nums &#x3D; [2,3,3,2,3,3]输出：2解释：最优切割为 [2,3,3,2] 和 [3,3] 。第一个子数组头尾数字的最大公约数为 2">
+  <meta name="description" content="解题思路很简单一题，但是因为不咋会链表和指针，就去学了学指针，又调了很长时间bug，简单模拟即可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leecode 切分数组">
-<meta property="og:url" content="https://vain-articles.github.io/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:title" content="leetcode 百刷1:--两数相加">
+<meta property="og:url" content="https://vain-articles.github.io/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/index.html">
 <meta property="og:site_name" content="Vain的博客">
-<meta property="og:description" content="dp + 筛最小素因子 + 枚举最小素因子切分数组:  给定一个整数数组 nums ，小李想将 nums 切割成若干个非空子数组，使得每个子数组最左边的数和最右边的数的最大公约数大于 1 。为了减少他的工作量，请求出最少可以切成多少个子数组。示例 1：输入：nums &#x3D; [2,3,3,2,3,3]输出：2解释：最优切割为 [2,3,3,2] 和 [3,3] 。第一个子数组头尾数字的最大公约数为 2">
+<meta property="og:description" content="解题思路很简单一题，但是因为不咋会链表和指针，就去学了学指针，又调了很长时间bug，简单模拟即可">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-04-29T04:37:47.000Z">
-<meta property="article:modified_time" content="2020-04-29T05:01:03.502Z">
+<meta property="article:published_time" content="2020-05-13T07:15:31.000Z">
+<meta property="article:modified_time" content="2020-05-13T07:17:06.663Z">
 <meta property="article:author" content="Vain">
-<meta property="article:tag" content="ACM算法">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Vain的博客" type="application/atom+xml">
@@ -157,7 +157,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM%E7%AE%97%E6%B3%95/" style="font-size: 20px;">ACM算法</a> <a href="/tags/leecode/" style="font-size: 10px;">leecode</a>
+                        <a href="/tags/ACM%E7%AE%97%E6%B3%95/" style="font-size: 20px;">ACM算法</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a>
                     </div>
                 </section>
                 
@@ -239,11 +239,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-leecode-切分数组" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-leetcode-百刷1：两数相加" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/" class="article-date">
-      <time datetime="2020-04-29T04:37:47.000Z" itemprop="datePublished">2020-04-29</time>
+      <a href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" class="article-date">
+      <time datetime="2020-05-13T07:15:31.000Z" itemprop="datePublished">2020-05-13</time>
 </a>
     </div>
   
@@ -256,7 +256,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leecode 切分数组
+      leetcode 百刷1:--两数相加
     </h1>
   
 
@@ -267,7 +267,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ACM%E7%AE%97%E6%B3%95/" rel="tag">ACM算法</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -277,36 +277,9 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <h1 id="dp-筛最小素因子-枚举最小素因子"><a href="#dp-筛最小素因子-枚举最小素因子" class="headerlink" title="dp + 筛最小素因子 + 枚举最小素因子"></a>dp + 筛最小素因子 + 枚举最小素因子</h1><p><a href="https://leetcode-cn.com/problems/qie-fen-shu-zu/" target="_blank" rel="noopener">切分数组:</a></p>
-<blockquote>
-<p>给定一个整数数组 nums ，小李想将 nums 切割成若干个非空子数组，使得每个子数组最左边的数和最右边的数的最大公约数大于 1 。为了减少他的工作量，请求出最少可以切成多少个子数组。<br>示例 1：<br>输入：nums = [2,3,3,2,3,3]<br>输出：2<br>解释：最优切割为 [2,3,3,2] 和 [3,3] 。第一个子数组头尾数字的最大公约数为 2 ，第二个子数组头尾数字的最大公约数为 3 。<br>示例 2：<br>输入：nums = [2,3,5,7]<br>输出：4<br>解释：只有一种可行的切割：[2], [3], [5], [7]</p>
-</blockquote>
-<hr>
-<p><strong>限制：</strong></p>
-<ul>
-<li>1 &lt;= nums.length &lt;= 10^5</li>
-<li>2 &lt;= nums[i] &lt;= 10^6<a id="more"></a>
-
-</li>
-</ul>
-<p><strong>思路:</strong></p>
-<ul>
-<li>首先我们先筛出最大数据以内(包括最大数据)所有数对应的最小素因子</li>
-<li>推导dp方程<blockquote>
-<p>1:当前i位置所对应的数的组数 = min(当前i位置对应的最小素因子的位置,dp[i]+1)<br>2:当前i位置对应的最小素因子的位置= min(min[a[i]]，dp[i-1])</p>
-</blockquote>
-</li>
-<li>枚举每个数的最小的最小素因子所对应的位置<blockquote>
-<p>因为当前数可能有好多素因子，所以我们把他除以他的最小素因子，呢么得到的数就会对应本身的最小素因子</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>参考代码:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int inf &#x3D; (1 &lt;&lt; 30);</span><br><span class="line">typedef long long ll;</span><br><span class="line">const int maxn &#x3D; 1e6 + 5;</span><br><span class="line">int pr[1000005], mpr[1000005], dp[1000005], a[1000005],mpos[1000005];</span><br><span class="line">void solv(int m) &#x2F;&#x2F;筛x的最小素因子</span><br><span class="line">&#123;</span><br><span class="line">    int cnt &#x3D; 0;</span><br><span class="line">    for (int i &#x3D; 2; i &lt;&#x3D; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!mpr[i])</span><br><span class="line">            pr[++cnt] &#x3D; i, mpr[i] &#x3D; i;</span><br><span class="line">        for (int j &#x3D; 1; j &lt;&#x3D; cnt; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (pr[j] * i &gt; m||pr[j]&gt;mpr[i])</span><br><span class="line">                break;</span><br><span class="line">            mpr[pr[j] * i] &#x3D; pr[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    ios::sync_with_stdio(false);</span><br><span class="line">    cin.tie(0);</span><br><span class="line">    int n,m;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    m&#x3D;~0x3f;</span><br><span class="line">    for (int i &#x3D; 1; i &lt;&#x3D; n; i++)</span><br><span class="line">        cin &gt;&gt; a[i],m&#x3D;max(m,a[i]);</span><br><span class="line">    solv(m);</span><br><span class="line">    memset(dp,0x3f3f3f,sizeof dp);</span><br><span class="line">    memset(mpos,0x3f3f3f3f,sizeof mpos);</span><br><span class="line">    dp[0]&#x3D;0;</span><br><span class="line">    for(int i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int temp&#x3D;a[i];</span><br><span class="line">        while(temp&gt;1)</span><br><span class="line">        &#123;</span><br><span class="line">             int ans&#x3D;mpr[temp];</span><br><span class="line">             &#x2F;&#x2F;cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">             mpos[ans]&#x3D;min(mpos[ans],dp[i-1]);&#x2F;&#x2F;得到当前最小素因子的最近位置</span><br><span class="line">             dp[i]&#x3D;min(dp[i],mpos[ans]+1);&#x2F;&#x2F;得到当前距离i的最小素因子的距离</span><br><span class="line">             temp&#x2F;&#x3D;ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout&lt;&lt;dp[n]&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p><strong>leecode 版本:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">int pr[1000005], mpr[1000005], dp[1000005], a[1000005],mpos[1000005];</span><br><span class="line">void solv(int m) &#x2F;&#x2F;筛m以内所有数的最小素因子</span><br><span class="line">&#123;</span><br><span class="line">    int cnt &#x3D; 0;</span><br><span class="line">    for (int i &#x3D; 2; i &lt;&#x3D; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (!mpr[i])</span><br><span class="line">            pr[++cnt] &#x3D; i, mpr[i] &#x3D; i;</span><br><span class="line">        for (int j &#x3D; 1; j &lt;&#x3D; cnt; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (pr[j] * i &gt; m||pr[j]&gt;mpr[i])</span><br><span class="line">                break;</span><br><span class="line">            mpr[pr[j] * i] &#x3D; pr[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public:</span><br><span class="line">    int splitArray(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">    int n,m;</span><br><span class="line">    n&#x3D;nums.size();</span><br><span class="line">    m&#x3D;~0x3f;</span><br><span class="line">    for (int i &#x3D; 0; i&lt;n; i++)</span><br><span class="line">        a[i+1]&#x3D;nums[i],m&#x3D;max(m,a[i+1]);</span><br><span class="line">    solv(m);</span><br><span class="line">    memset(dp,0x3f3f3f,sizeof dp);</span><br><span class="line">    memset(mpos,0x3f3f3f3f,sizeof mpos);</span><br><span class="line">    dp[0]&#x3D;0;</span><br><span class="line">    for(int i&#x3D;1;i&lt;&#x3D;n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int temp&#x3D;a[i];</span><br><span class="line">        while(temp&gt;1)</span><br><span class="line">        &#123;</span><br><span class="line">             int ans&#x3D;mpr[temp];</span><br><span class="line">             &#x2F;&#x2F;cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">             mpos[ans]&#x3D;min(mpos[ans],dp[i-1]);&#x2F;&#x2F;得到当前最小素因子的最近位置</span><br><span class="line">             dp[i]&#x3D;min(dp[i],mpos[ans]+1);&#x2F;&#x2F;得到当前距离i的最小素因子的距离</span><br><span class="line">             temp&#x2F;&#x3D;ans;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return dp[n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+        <h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>很简单一题，但是因为不咋会链表和指针，就去学了学指针，又调了很长时间bug，简单模拟即可</p>
+<a id="more"></a>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">1000</span>], b[<span class="number">1000</span>], c[<span class="number">2000</span>];</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">addTwoNumbers</span><span class="params">(ListNode *l1, ListNode *l2)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ListNode *p1 = l1, *p2 = l2;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>, y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (l1 != <span class="literal">NULL</span>)</span><br><span class="line">            a[++x] = l1-&gt;val, l1 = l1-&gt;next;</span><br><span class="line">        <span class="keyword">while</span> (l2 != <span class="literal">NULL</span>)</span><br><span class="line">            b[++y] = l2-&gt;val, l2 = l2-&gt;next;</span><br><span class="line">        <span class="keyword">int</span> res = max(x, y);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= res; i++)</span><br><span class="line">            c[i] = (c[i]+a[i] + b[i]),c[i + <span class="number">1</span>] += c[i] / <span class="number">10</span>,c[i]%=<span class="number">10</span>;</span><br><span class="line">        <span class="keyword">int</span> id=c[res+<span class="number">1</span>]?<span class="number">1</span>:<span class="number">0</span>,k=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (x &lt;= y)</span><br><span class="line">        &#123;</span><br><span class="line">           l2 = p2;</span><br><span class="line">            <span class="keyword">while</span> (<span class="number">1</span>)&#123; </span><br><span class="line">                l2-&gt;val = c[++ k]; </span><br><span class="line">                <span class="keyword">if</span>(l2-&gt;next==<span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                l2=l2-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (id)&#123;</span><br><span class="line">                k++;l2-&gt;next= <span class="keyword">new</span> ListNode(c[k]);&#125;</span><br><span class="line">            l2 = p2;</span><br><span class="line">            <span class="keyword">return</span> l2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">             l1 = p1;</span><br><span class="line">            <span class="keyword">while</span> (<span class="number">1</span>)&#123; </span><br><span class="line">                l1-&gt;val = c[++ k]; </span><br><span class="line">                <span class="keyword">if</span>(l1-&gt;next==<span class="literal">NULL</span>)</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                 l1=l1-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (id)&#123;</span><br><span class="line">                k++;l1-&gt;next= <span class="keyword">new</span> ListNode(c[k]);&#125;</span><br><span class="line">            l1 = p1;</span><br><span class="line">            <span class="keyword">return</span> l1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
       
@@ -362,13 +335,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></p>
+        <p><span>本文标题:</span><a href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">leetcode 百刷1:--两数相加</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Vain 的个人博客">Vain</a></p>
-        <p><span>发布时间:</span>2020年04月29日 - 12时37分</p>
-        <p><span>最后更新:</span>2020年04月29日 - 13时01分</p>
+        <p><span>发布时间:</span>2020年05月13日 - 15时15分</p>
+        <p><span>最后更新:</span>2020年05月13日 - 15时17分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/" title="leecode 切分数组">https://vain-articles.github.io/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://vain-articles.github.io/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/　　作者: Vain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" title="leetcode 百刷1:--两数相加">https://vain-articles.github.io/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://vain-articles.github.io/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/　　作者: Vain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -381,18 +354,9 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          替罪羊树模板
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">可持久化数组</div>
+    <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leecode 三数之和</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -403,7 +367,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#dp-筛最小素因子-枚举最小素因子"><span class="toc-number">1.</span> <span class="toc-text">dp + 筛最小素因子 + 枚举最小素因子</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#解题思路"><span class="toc-number">1.</span> <span class="toc-text">解题思路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码"><span class="toc-number">2.</span> <span class="toc-text">代码</span></a></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -471,18 +435,16 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/" title="上一篇: 替罪羊树模板">
-                <i class="fa fa-angle-left"></i>
-            </a>
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/" title="下一篇: 可持久化数组">
+            <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="下一篇: leecode 三数之和">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/leecode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">leecode 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">leecode 1438. 绝对差不超过限制的最长连续子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/">bbb群主的快读板子</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/">文艺平衡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/">AtCoder 4351前缀和+二分+求顺序对数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/">SPOJ DQUERY(主席树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/02/Fhq-treap/">Fhq treap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/">替罪羊树模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/">可持久化数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/">浅谈主席树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/">HDU 3282 动态开点+区间第k小</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/">ABA的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/O-n-%E5%93%88%E5%B8%8C%E6%A3%80%E9%AA%8C%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">O(n)哈希检验求最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">leetcode 百刷1:--两数相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">leecode 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">leecode 1438. 绝对差不超过限制的最长连续子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/">bbb群主的快读板子</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/">文艺平衡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/">AtCoder 4351前缀和+二分+求顺序对数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/">SPOJ DQUERY(主席树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/02/Fhq-treap/">Fhq treap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/">替罪羊树模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/leetcode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/">可持久化数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/">浅谈主席树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/">HDU 3282 动态开点+区间第k小</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/">ABA的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/O-n-%E5%93%88%E5%B8%8C%E6%A3%80%E9%AA%8C%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">O(n)哈希检验求最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");

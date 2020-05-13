@@ -4,19 +4,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>leecode 1438. 绝对差不超过限制的最长连续子数组 | Vain的博客</title>
+  <title>leecode 三数之和 | Vain的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="传送门： 题意：   给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k  思路：双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可">
+  <meta name="description" content="题目链接:三数之和题意：给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c &#x3D; 0 ？请你找出所有满足条件且不重复的三元组。 注意：答案中不可以包含重复的三元组。 示例： 给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leecode 1438. 绝对差不超过限制的最长连续子数组">
-<meta property="og:url" content="https://vain-articles.github.io/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:title" content="leecode 三数之和">
+<meta property="og:url" content="https://vain-articles.github.io/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/index.html">
 <meta property="og:site_name" content="Vain的博客">
-<meta property="og:description" content="传送门： 题意：   给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k  思路：双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可">
+<meta property="og:description" content="题目链接:三数之和题意：给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c &#x3D; 0 ？请你找出所有满足条件且不重复的三元组。 注意：答案中不可以包含重复的三元组。 示例： 给定数组 nums &#x3D; [-1, 0, 1, 2, -1, -4]，满足要求的三元组集合为：">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-05-09T14:07:59.000Z">
-<meta property="article:modified_time" content="2020-05-09T14:09:20.265Z">
+<meta property="article:published_time" content="2020-05-11T14:14:50.000Z">
+<meta property="article:modified_time" content="2020-05-13T07:12:51.110Z">
 <meta property="article:author" content="Vain">
-<meta property="article:tag" content="leecode">
+<meta property="article:tag" content="leetcode">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Vain的博客" type="application/atom+xml">
@@ -157,7 +157,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/ACM%E7%AE%97%E6%B3%95/" style="font-size: 20px;">ACM算法</a> <a href="/tags/leecode/" style="font-size: 10px;">leecode</a>
+                        <a href="/tags/ACM%E7%AE%97%E6%B3%95/" style="font-size: 20px;">ACM算法</a> <a href="/tags/leetcode/" style="font-size: 10px;">leetcode</a>
                     </div>
                 </section>
                 
@@ -239,11 +239,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="post-leecode-1438-绝对差不超过限制的最长连续子数组" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-leetcode-三数之和" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" class="article-date">
-      <time datetime="2020-05-09T14:07:59.000Z" itemprop="datePublished">2020-05-09</time>
+      <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" class="article-date">
+      <time datetime="2020-05-11T14:14:50.000Z" itemprop="datePublished">2020-05-11</time>
 </a>
     </div>
   
@@ -256,7 +256,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      leecode 1438. 绝对差不超过限制的最长连续子数组
+      leecode 三数之和
     </h1>
   
 
@@ -267,7 +267,7 @@
 
         
     <div class="article-tag tagcloud">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leecode/" rel="tag">leecode</a></li></ul>
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/" rel="tag">leetcode</a></li></ul>
     </div>
 
         <div class="clearfix"></div>
@@ -277,16 +277,21 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        <p><a href="https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/" target="_blank" rel="noopener">传送门：</a></p>
-<p><strong>题意：</strong> </p>
-<blockquote>
-<p>给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k</p>
-</blockquote>
-<p><strong>思路：</strong><br>双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可</p>
+        <p>题目链接:<br><a href="https://leetcode-cn.com/problems/3sum/" target="_blank" rel="noopener">三数之和</a><br><strong>题意：</strong><br>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。</p>
+<p>注意：答案中不可以包含重复的三元组。</p>
+<p>示例：</p>
+<p>给定数组 nums = <code>[-1, 0, 1, 2, -1, -4]</code>，<br>满足要求的三元组集合为：</p>
 <a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [-1, 0, 1],</span><br><span class="line">  [-1, -1, 2]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<hr>
+<p>思路:</p>
+<blockquote>
+<p>双指针+剪枝，具体操作看代码</p>
+</blockquote>
+<p>参考代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">map&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;mp;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; threeSum(vector&lt;<span class="keyword">int</span>&gt; &amp;nums)</span><br><span class="line">    &#123;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        vector&lt;vector&lt;<span class="keyword">int</span>&gt;&gt; vec;</span><br><span class="line">        <span class="keyword">int</span> n = nums.size();</span><br><span class="line">        string s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> l = i + <span class="number">1</span>, j = i + <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(mp[nums[i]])</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            mp[nums[i]]=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span> (j &lt; n)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span> ((nums[i] + nums[l] + nums[j]) &lt; <span class="number">0</span> &amp;&amp; l &lt; j &amp;&amp; j &lt; n)</span><br><span class="line">                    l++;</span><br><span class="line">                <span class="keyword">while</span> ((nums[i] + nums[l] + nums[j]) &gt; <span class="number">0</span> &amp;&amp; l &gt; i + <span class="number">1</span> &amp;&amp; l &lt; j)</span><br><span class="line">                    l--;</span><br><span class="line">                <span class="keyword">if</span> ((nums[i] + nums[l] + nums[j]) == <span class="number">0</span> &amp;&amp; l &lt; j &amp;&amp; j &lt; n)</span><br><span class="line">                &#123;</span><br><span class="line">                        vec.push_back(vector&lt;<span class="keyword">int</span>&gt;&#123;nums[i], nums[l], nums[j]&#125;);</span><br><span class="line">                &#125;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(vec.begin(), vec.end());</span><br><span class="line">        vec.erase(unique(vec.begin(), vec.end()), vec.end());</span><br><span class="line">        <span class="keyword">return</span> vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><strong>参考代码：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="keyword">int</span> q1[<span class="number">100005</span>], q2[<span class="number">100005</span>], a[<span class="number">100005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solv</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> head1 = <span class="number">0</span>, tail1 = -<span class="number">1</span>, head2 = <span class="number">0</span>, tail2 = -<span class="number">1</span>, res = <span class="number">0</span>, l = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (head1 &lt;= tail1 &amp;&amp; a[q1[tail1]] &gt;=a[i])</span><br><span class="line">            tail1--;</span><br><span class="line">        <span class="keyword">while</span> (head2 &lt;= tail2 &amp;&amp; a[q2[tail2]] &lt;=a[i])</span><br><span class="line">            tail2--;</span><br><span class="line">        <span class="keyword">while</span> (head1 &lt;= tail1 &amp;&amp; q1[head1] &lt; l)</span><br><span class="line">            head1++;</span><br><span class="line">        <span class="keyword">while</span> (head2 &lt;= tail2 &amp;&amp; q2[head2] &lt; l)</span><br><span class="line">            head2++; </span><br><span class="line">        q1[++tail1] = i;</span><br><span class="line">        q2[++tail2] = i;</span><br><span class="line">        <span class="keyword">if</span> (a[q2[head2]] - a[q1[head1]] &lt;= k)</span><br><span class="line">            res = max(res, i - l + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans=res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestSubarray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> n=nums.size();</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">      a[i]=nums[i];</span><br><span class="line">      solv(n,limit); </span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
       
       
@@ -342,13 +347,13 @@
   
     
     <div class="copyright">
-        <p><span>本文标题:</span><a href="/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">leecode 1438. 绝对差不超过限制的最长连续子数组</a></p>
+        <p><span>本文标题:</span><a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">leecode 三数之和</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 Vain 的个人博客">Vain</a></p>
-        <p><span>发布时间:</span>2020年05月09日 - 22时07分</p>
-        <p><span>最后更新:</span>2020年05月09日 - 22时09分</p>
+        <p><span>发布时间:</span>2020年05月11日 - 22时14分</p>
+        <p><span>最后更新:</span>2020年05月13日 - 15时12分</p>
         <p>
-            <span>原始链接:</span><a class="post-url" href="/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" title="leecode 1438. 绝对差不超过限制的最长连续子数组">https://vain-articles.github.io/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/</a>
-            <span class="copy-path" data-clipboard-text="原文: https://vain-articles.github.io/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/　　作者: Vain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <span>原始链接:</span><a class="post-url" href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="leecode 三数之和">https://vain-articles.github.io/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</a>
+            <span class="copy-path" data-clipboard-text="原文: https://vain-articles.github.io/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/　　作者: Vain" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
             <script src="/js/clipboard.min.js"></script>
             <script> var clipboard = new Clipboard('.copy-path'); </script>
         </p>
@@ -361,18 +366,18 @@
 
 <nav id="article-nav">
   
-    <a href="/2020/05/11/leecode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
-          leecode 三数之和
+          leetcode 百刷1:--两数相加
         
       </div>
     </a>
   
   
-    <a href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">bbb群主的快读板子</div>
+    <a href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leecode 1438. 绝对差不超过限制的最长连续子数组</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
@@ -451,18 +456,18 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2020/05/11/leecode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" title="上一篇: leecode 三数之和">
+            <a href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/" title="上一篇: leetcode 百刷1:--两数相加">
                 <i class="fa fa-angle-left"></i>
             </a>
         
         <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
         
-            <a href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" title="下一篇: bbb群主的快读板子">
+            <a href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" title="下一篇: leecode 1438. 绝对差不超过限制的最长连续子数组">
                 <i class="fa fa-angle-right"></i>
             </a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/leecode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">leecode 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/leecode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">leecode 1438. 绝对差不超过限制的最长连续子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/">bbb群主的快读板子</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/">文艺平衡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/">AtCoder 4351前缀和+二分+求顺序对数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/">SPOJ DQUERY(主席树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/02/Fhq-treap/">Fhq treap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/">替罪羊树模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/leecode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/">可持久化数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/">浅谈主席树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/">HDU 3282 动态开点+区间第k小</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/">ABA的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/O-n-%E5%93%88%E5%B8%8C%E6%A3%80%E9%AA%8C%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">O(n)哈希检验求最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2020/05/13/leetcode-%E7%99%BE%E5%88%B71%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">leetcode 百刷1:--两数相加</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">leecode 三数之和</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">leecode 1438. 绝对差不超过限制的最长连续子数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/">bbb群主的快读板子</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/">文艺平衡树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/">AtCoder 4351前缀和+二分+求顺序对数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/">SPOJ DQUERY(主席树)</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/02/Fhq-treap/">Fhq treap</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/">替罪羊树模板</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/29/leetcode-%E5%88%87%E5%88%86%E6%95%B0%E7%BB%84/">leecode 切分数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E6%95%B0%E7%BB%84/">可持久化数组</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E6%B5%85%E8%B0%88%E4%B8%BB%E5%B8%AD%E6%A0%91/">浅谈主席树</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/24/%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%AE%9E%E7%8E%B0%E6%99%AE%E9%80%9A%E5%B9%B3%E8%A1%A1%E6%A0%91%E6%93%8D%E4%BD%9C/">线段树实现普通平衡树操作</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/HDU-3282-%E5%8A%A8%E6%80%81%E5%BC%80%E7%82%B9-%E5%8C%BA%E9%97%B4%E7%AC%ACk%E5%B0%8F/">HDU 3282 动态开点+区间第k小</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/ABA%E7%9A%84%E4%B8%AA%E6%95%B0/">ABA的个数</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/19/O-n-%E5%93%88%E5%B8%8C%E6%A3%80%E9%AA%8C%E6%B1%82%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">O(n)哈希检验求最长回文子串</a></li><li class="post-list-item"><a class="post-list-link" href="/2020/04/17/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a></li></ul>
     <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
