@@ -23,16 +23,20 @@
 
 
   
+  <meta name="keywords" content="Codeforces" />
+
 
 
 <meta name="description" content="算法 C/C++ Python Linux Golang" >
 
 
-<link rel="canonical" href="https://vain-articles.github.io/">
+<link rel="canonical" href="https://vain-articles.github.io/2020/07/31/Codeforces-Round-660-Div-2/">
 
 
 
-  <title>Vain的博客 = Vain学习(C/C++ acm算法 python Linux Golang)的个人网站</title>
+  <title>
+Codeforces Round #660 (Div. 2) |
+Vain的博客 = Vain学习(C/C++ acm算法 python Linux Golang)的个人网站</title>
 <meta name="generator" content="Hexo 4.2.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="loading">
@@ -127,23 +131,53 @@
       <div class="inner">
         <div class="content pjax">
           
-  <div class="index wrap">
-        
-  <div class="card">
+  <div class="article wrap">
+    <div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <i class="ic i-home"></i>
+  <span>
+    <a href="/">Home</a>
+  </span>
+</div>
 
-    <div class="cover">
-      <p>Codeforces Round #660 (Div. 2)</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/07/31/Codeforces-Round-660-Div-2/" itemprop="url" title="Codeforces Round #660 (Div. 2)">Codeforces Round #660 (Div. 2)</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-07-31T17:19:19+08:00">2020-07-31</time>
-          </div>
-          <div class="posts">
-              <p>A:<br>思路：<br>用 6 10 14 15 去构造答案，因为只用前三个构造可能会出现重复的</p>
+<article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="https://vain-articles.github.io/2020/07/31/Codeforces-Round-660-Div-2/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="name" content="Vain">
+    <meta itemprop="description" content="Vain学习(C/C++ acm算法 python Linux Golang)的个人网站算法 C/C++ Python Linux Golang">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Vain的博客">
+  </span>
+    <header>
+
+      <h1 class="title" itemprop="name headline">
+        Codeforces Round #660 (Div. 2)
+      </h1>
+
+      <div class="meta">
+        <span class="item" title="Created: 2020-07-31 17:19:19">
+          <span class="icon">
+            <i class="ic i-calendar"></i>
+          </span>
+          <span class="text">Posted on</span>
+          <time itemprop="dateCreated datePublished" datetime="2020-07-31T17:19:19+08:00">2020-07-31</time>
+        </span>
+      </div>
+        <div class="tags">
+            <a href="/tags/Codeforces/" rel="tag"><i class="ic i-tag"></i> Codeforces</a>
+        </div>
+    </header>
+
+  
+  
+  
+  <div class="body" itemprop="articleBody">
+    
+
+    <p>A:<br>思路：<br>用 6 10 14 15 去构造答案，因为只用前三个构造可能会出现重复的</p>
 <p>参考代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;ctime&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> ll maxn = <span class="number">3e5</span> + <span class="number">5</span>;</span><br><span class="line"><span class="comment">//int a[maxn];</span></span><br><span class="line"><span class="keyword">char</span> s[N];</span><br><span class="line">map&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; mp;</span><br><span class="line"><span class="keyword">int</span> pre[maxn], sum[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="keyword">false</span>);</span><br><span class="line">    cin.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    cin &gt;&gt; t;</span><br><span class="line">    <span class="keyword">while</span> (t--)</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">6</span>, b = <span class="number">10</span>, c = <span class="number">14</span>, d = <span class="number">15</span>;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        cin &gt;&gt; n;</span><br><span class="line">        <span class="keyword">if</span> (n - a - b - c &lt;= <span class="number">0</span>)</span><br><span class="line">            cout &lt;&lt; <span class="string">"NO"</span> &lt;&lt; endl;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> e = n - a - b - c;</span><br><span class="line">            <span class="keyword">if</span> (e == a || e == b || e == c)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (n - a - b - d &lt;= <span class="number">0</span>)</span><br><span class="line">                    cout &lt;&lt; <span class="string">"NO"</span> &lt;&lt; endl;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    cout &lt;&lt; <span class="string">"YES"</span> &lt;&lt; endl;</span><br><span class="line">                    cout &lt;&lt; a &lt;&lt; <span class="string">' '</span> &lt;&lt; b &lt;&lt; <span class="string">' '</span> &lt;&lt; d &lt;&lt; <span class="string">' '</span> &lt;&lt; n - a - b - d &lt;&lt; endl;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                cout &lt;&lt; <span class="string">"YES"</span> &lt;&lt; endl;</span><br><span class="line">                cout &lt;&lt; a &lt;&lt; <span class="string">' '</span> &lt;&lt; b &lt;&lt; <span class="string">' '</span> &lt;&lt; c &lt;&lt; <span class="string">' '</span> &lt;&lt; e &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>B：<br>思路：<br>他让用x构造最大的二进制串r，但这个x又要在所有可能里尽可能的小，这个x是个n位数，显然二进制串当然越长越好了，所以只有两种选择，9和8都是3位的，但又要让x尽可能的小，呢么删掉的n位就需要是8即可</p>
@@ -155,278 +189,84 @@
 
 
 
-          </div>
-        <a href="/2020/07/31/Codeforces-Round-660-Div-2/" itemprop="url" title="Codeforces Round #660 (Div. 2)" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>洛谷 P4309 最长上升子序列（平衡树维护）</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/16/%E6%B4%9B%E8%B0%B7-P4309-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%B9%B3%E8%A1%A1%E6%A0%91%E7%BB%B4%E6%8A%A4%EF%BC%89/" itemprop="url" title="洛谷 P4309 最长上升子序列（平衡树维护）">洛谷 P4309 最长上升子序列（平衡树维护）</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-16T10:27:51+08:00">2020-05-16</time>
-          </div>
-          <div class="posts">
-              <p><span class="exturl" data-url="aHR0cHM6Ly93d3cubHVvZ3UuY29tLmNuL3Byb2JsZW0vUDQzMDk=">传送门：</span></p>
-<p><strong>题目描述</strong></p>
-<p>给定一个序列，初始为空。现在我们将1到N的数字插入到序列中，每次将一个数字插入到一个特定的位置。每插入一个数字，我们都想知道此时最长上升子序列长度是多少？</p>
-<p><strong>输入格式</strong></p>
-<p>第一行一个整数N，表示我们要将1到N插入序列中。<br>接下是N个数字，第k个数字Xk，表示我们将k插入到位置Xk。（0&lt;=Xk&lt;=k-1,1&lt;=k&lt;=N）</p>
-<p><strong>输出格式</strong></p>
-<p>N行，第i行表示i插入Xi位置后序列的最长上升子序列的长度是多少。</p>
-            
-          </div>
-        <a href="/2020/05/16/%E6%B4%9B%E8%B0%B7-P4309-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%B9%B3%E8%A1%A1%E6%A0%91%E7%BB%B4%E6%8A%A4%EF%BC%89/" itemprop="url" title="洛谷 P4309 最长上升子序列（平衡树维护）" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>Leetcode 三数之和</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" itemprop="url" title="Leetcode 三数之和">Leetcode 三数之和</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-11T22:14:50+08:00">2020-05-11</time>
-          </div>
-          <div class="posts">
-              <p>题目链接:<br><span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvM3N1bS8=">三数之和</span><br><strong>题意：</strong><br>给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。</p>
-<p>注意：答案中不可以包含重复的三元组。</p>
-<p>示例：</p>
-<p>给定数组 nums = <code>[-1, 0, 1, 2, -1, -4]</code>，<br>满足要求的三元组集合为：</p>
-            
-          </div>
-        <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" itemprop="url" title="Leetcode 三数之和" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>Leetcode 1438. 绝对差不超过限制的最长连续子数组</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" itemprop="url" title="Leetcode 1438. 绝对差不超过限制的最长连续子数组">Leetcode 1438. 绝对差不超过限制的最长连续子数组</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-09T22:07:59+08:00">2020-05-09</time>
-          </div>
-          <div class="posts">
-              <p><span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvbG9uZ2VzdC1jb250aW51b3VzLXN1YmFycmF5LXdpdGgtYWJzb2x1dGUtZGlmZi1sZXNzLXRoYW4tb3ItZXF1YWwtdG8tbGltaXQv">传送门：</span></p>
-<p><strong>题意：</strong> </p>
-<blockquote>
-<p>给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k</p>
-</blockquote>
-<p><strong>思路：</strong><br>双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可</p>
-            
-          </div>
-        <a href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" itemprop="url" title="Leetcode 1438. 绝对差不超过限制的最长连续子数组" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>bbb群主的快读板子</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" itemprop="url" title="bbb群主的快读板子">bbb群主的快读板子</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-08T21:49:03+08:00">2020-05-08</time>
-          </div>
-          <div class="posts">
-              <p>ios对cin的加速欺骗了我，md数据量稍微大一点就TLE了，不太靠谱，搞一波bbb群主的快读板子，用于对付卡常用，虽然一般感觉用不到叭，<code>scanf</code>够用了，但搞上一波没啥坏处</p>
-            
-          </div>
-        <a href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" itemprop="url" title="bbb群主的快读板子" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>文艺平衡树</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/" itemprop="url" title="文艺平衡树">文艺平衡树</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-07T21:17:17+08:00">2020-05-07</time>
-          </div>
-          <div class="posts">
-              <p><span class="exturl" data-url="aHR0cHM6Ly93d3cubHVvZ3UuY29tLmNuL3Byb2JsZW0vUDMzOTE=">传送门：文艺平衡树</span><br>首先要阐述一点，Fhq Treap的按大小分裂是支持区间操作的，而按值分裂是不支持区间操作的。<br>Fhq Treap的分裂方式：</p>
-<ul>
-<li>按权值分裂</li>
-<li>按大小分裂</li>
-</ul>
-<p>按权值分裂：</p>
-<blockquote>
-<p>根据插入点的权值，将树按w为边界，分裂为两颗树，一颗树的权值大于w，一棵树的权值小于等于w，这样再把新节点合并进去，就可以维护树的平衡</p>
-</blockquote>
-<p>按大小分裂：</p>
-<blockquote>
-<p>根据插入点的节点大小，将树按big为边界，分裂为两颗树，一颗树的节点大小大于big，一棵树的节点大小小于等于big，这样再把新节点合并进去，不仅可以维护树的平衡，还支持区间操作</p>
-</blockquote>
-            
-          </div>
-        <a href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/" itemprop="url" title="文艺平衡树" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>AtCoder 4351前缀和+二分+求顺序对数</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/" itemprop="url" title="AtCoder 4351前缀和+二分+求顺序对数">AtCoder 4351前缀和+二分+求顺序对数</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-05T14:53:03+08:00">2020-05-05</time>
-          </div>
-          <div class="posts">
-              <p><strong>题意：</strong></p>
-<p><span class="exturl" data-url="aHR0cHM6Ly9hcmMxMDEuY29udGVzdC5hdGNvZGVyLmpwL3Rhc2tzL2FyYzEwMV9iP2xhbmc9ZW4=">题目链接</span></p>
-<blockquote>
-<p>给一个长为N的序列，求出所有子区间中位数组成的新序列的中位数</p>
-</blockquote>
-            
-          </div>
-        <a href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/" itemprop="url" title="AtCoder 4351前缀和+二分+求顺序对数" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>SPOJ DQUERY(主席树)</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/" itemprop="url" title="SPOJ DQUERY(主席树)">SPOJ DQUERY(主席树)</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-03T19:22:16+08:00">2020-05-03</time>
-          </div>
-          <div class="posts">
-              <p><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Bvai5jb20vcHJvYmxlbXMvRFFVRVJZL2VuLw==">传送门</span></p>
-<p><strong>题意：</strong><br>给长度为n的序列，询问区间中的元素个数(去重后的元素个数），m次询问，$n在[1,3<em>10^4], m在[1,2</em>10^5]$。</p>
-<p><strong>思路：</strong><br>用主席树去写，每颗树存从[1,i]区间的信息，我们把这颗树中出现多次的数去重，只保最每个数在最右边出现的位置信息，其余位置的sum为0，然后询问时候，在含有当前区间信息的树中，进行区间求和</p>
-            
-          </div>
-        <a href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/" itemprop="url" title="SPOJ DQUERY(主席树)" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>Fhq treap</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/02/Fhq-treap/" itemprop="url" title="Fhq treap">Fhq treap</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-02T17:54:18+08:00">2020-05-02</time>
-          </div>
-          <div class="posts">
-              <p><span class="exturl" data-url="aHR0cHM6Ly93d3cubHVvZ3UuY29tLmNuL3Byb2JsZW0vUDMzNjk=">传送门：</span></p>
-<blockquote>
-<p>学了Fhq Treap之后，我深深的了解到 Fhq Treap的牛逼，因为上一张学了替罪羊平衡树，码量很大，操作繁琐，不支持提取区间信息，虽然简单理解，但是Fhq也很好理解呀，而且码量不大，能快速维护一颗平衡树，支持提取区间信息</p>
-</blockquote>
-<p><strong>Fhq Treap 的骚操作:</strong></p>
-<ul>
-<li>分裂</li>
-<li>合并</li></ul>
-            
-          </div>
-        <a href="/2020/05/02/Fhq-treap/" itemprop="url" title="Fhq treap" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
-        
-  <div class="card">
-
-    <div class="cover">
-      <p>替罪羊树模板</p>
-    </div>
-    <div class="message">
-      <div class="inner">
-        <h2 class="title">
-          <a href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/" itemprop="url" title="替罪羊树模板">替罪羊树模板</a>
-        </h2>
-          <div class="meta">
-            <i class="ic i-calendar"></i><time itemprop="dateCreated datePublished" datetime="2020-05-01T23:44:25+08:00">2020-05-01</time>
-          </div>
-          <div class="posts">
-              <h1 id="替罪羊树入门"><a href="#替罪羊树入门" class="headerlink" title="替罪羊树入门:"></a>替罪羊树入门:</h1><p><strong>以洛谷模板题为例:</strong><br><span class="exturl" data-url="aHR0cHM6Ly93d3cubHVvZ3UuY29tLmNuL3Byb2JsZW0vUDMzNjk=">普通平衡树</span></p>
-<blockquote>
-<p>这题正解是替罪羊树，呢么什么是替罪羊树？<br>替罪羊树其实就是一颗平衡树，但是我们要如何去维护树的平衡呢？<br>俗话说，暴力即优雅，替罪羊树，是通过重新构造不平衡的子树来进行维护树的平衡的<br>替罪羊树的部分:</p>
-</blockquote>
-<ul>
-<li>插入操作:插入节点((检查树的平衡(不平衡，则重构树(中序遍历，分治重构树，)，更新树的节点信息)))</li>
-<li>删除操作:删除节点((检查树的平衡(不平衡，则重构树(中序遍历，分治重构树，)，更新树的节点信息)))</li></ul>
-            
-          </div>
-        <a href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/" itemprop="url" title="替罪羊树模板" class="btn">more...</a>
-      </div>
-    </div>
-  </div>
-
   </div>
 
   
-  <nav class="pagination">
-    <div class="inner">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="ic i-angle-right" aria-label="Next page"></i></a>
+  
+  
+
+  
+   <footer>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>give me a cup of coffee</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Vain WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Vain Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Vain PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright" class="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Vain @Vain的博客
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="https://vain-articles.github.io/2020/07/31/Codeforces-Round-660-Div-2/" title="Codeforces Round #660 (Div. 2)">https://vain-articles.github.io/2020/07/31/Codeforces-Round-660-Div-2/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+    
+
+  </footer>
+
+  
+</article>
+  
+  
+  
+
+  </div>
+  <div class="nav">
+  <div class="inner">
+    <div class="item">
+      <a href="/2020/05/16/%E6%B4%9B%E8%B0%B7-P4309-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%B9%B3%E8%A1%A1%E6%A0%91%E7%BB%B4%E6%8A%A4%EF%BC%89/" rel="prev">
+        <i class="ic i-chevron-left"></i> Previous Post
+      </a>
     </div>
-  </nav>
+    <div class="item">
+    </div>
+  </div>
+</div>
 
-
+  <div class="comments wrap" id="comments" data-id="b139d794c67d208c7728d19323716a20"></div>
 
         </div>
         <div class="sidebar">
           
+
 <div class="inner">
 
   <div class="panels">
@@ -480,11 +320,11 @@
     <li class="up"><i class="ic i-arrow-up"></i></li>
     <li class="down"><i class="ic i-arrow-down"></i></li>
     <li class="next pjax">
-        <a href="/page/2/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
     </li>
     <li class="percent"></li>
   </ul>
 </div>
+
 
         </div>
         <div class="dimmer"></div>
@@ -522,6 +362,18 @@
       show: "（●´3｀●）",
       hide: "(´Д｀)"
     },
+    valine: "npm/valine@1.4.14/dist/Valine.min.js",
+    comments    : {
+      appId      : "Your_appId",
+      appKey     : "Your_appkey",
+      placeholder: "ヽ(○´∀`)ﾉ♪",
+      avatar     : "mm",
+      pageSize   : 10,
+      visitor    : true,
+      lang       : "zh-cn",
+      recordIP   : true,
+      serverURLs : ""
+    },
     mediumzoom: "npm/medium-zoom@1.0.5/dist/medium-zoom.min.js",
     search : {
       appID    : "",
@@ -538,7 +390,7 @@
           return uri.includes('#');
         },
         function(uri) {
-          return uri === 'https://vain-articles.github.io/';
+          return uri === 'https://vain-articles.github.io/2020/07/31/Codeforces-Round-660-Div-2/';
         }
       ]
     }
