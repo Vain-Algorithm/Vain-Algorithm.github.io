@@ -1,10 +1,183 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="generator" content="Hexo 4.2.0"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><meta name="keywords" content="[object Object]"><meta name="description" content="传送门：
-题意： 
 
-给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
 
-思路：双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可"><meta name="author" content="Vain"><title>Leetcode 1438. 绝对差不超过限制的最长连续子数组 - Vain的博客</title><meta description="传送门： 题意：   给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k  思路：双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可"><meta property="og:type" content="article"><meta property="og:title" content="Leetcode 1438. 绝对差不超过限制的最长连续子数组"><meta property="og:url" content="https://vain-articles.github.io/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/"><meta property="og:site_name" content="Vain"><meta property="og:description" content="传送门： 题意：   给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k  思路：双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可"><meta property="og:locale" content="en_US"><meta property="article:published_time" content="2020-05-09T14:07:59.000Z"><meta property="article:modified_time" content="2020-05-15T10:27:02.300Z"><meta property="article:author" content="Vain"><meta property="article:tag" content="leetcode"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://vain-articles.github.io/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://vain-articles.github.io/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/"},"headline":"Leetcode 1438. 绝对差不超过限制的最长连续子数组","image":["https://vain-articles.github.io/img/avatar.png"],"datePublished":"2020-05-09T14:07:59.000Z","dateModified":"2020-05-15T10:27:02.300Z","author":{"@type":"Person","name":"Vain"},"description":"传送门： 题意：   给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k  思路：双单调队列，一个维护当前区间最大，一个维护当前区间最小，如果当前区间最大-最小满足条件，呢么当前区间整体满足条件，否则让单调队列中的除去当前存在的左端点即可"}</script><link rel="alternative" href="/atom.xml" title="Vain的博客" type="application/atom+xml"><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><link rel="stylesheet" href="/css/style.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><link rel="stylesheet" href="/live2d/waifu.css"><script type="text/javascript" async src="/live2d/autoload.js"></script></head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="Vain的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/media">影音</a><a class="navbar-item" href="/album">相册</a><a class="navbar-item" href="/friend">友链</a><a class="navbar-item" href="/self-talking">碎碎念</a><a class="navbar-item" href="/message">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/removeif"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-05-09  <span class="level-item"><i class="far fa-clock"> </i>2 m  <i class="fas fa-pencil-alt"> </i>0.3 k</span><span class="level-item" id="busuanzi_container_page_pv"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span> visits</span></div></div><h1 class="title is-3 is-size-4-mobile">Leetcode 1438. 绝对差不超过限制的最长连续子数组</h1><div class="content"><p><a href="https://leetcode-cn.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/">传送门：</a></p>
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="Vain的博客" href="https://vain-articles.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="Vain的博客" href="https://vain-articles.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="Vain的博客" href="https://vain-articles.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Noto Serif JP:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+
+<link rel="stylesheet" href="/css/app.css">
+
+
+  
+  <meta name="keywords" content="leetcode" />
+
+
+
+<meta name="description" content="算法 C/C++ Python Linux Golang" >
+
+
+<link rel="canonical" href="https://vain-articles.github.io/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">
+
+
+
+  <title>
+Leetcode 1438. 绝对差不超过限制的最长连续子数组 |
+Vain的博客 = Vain学习(C/C++ acm算法 python Linux Golang)的个人网站</title>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="body"></div>
+      <div class="tail"></div>
+      <div class="head"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <nav>
+  <div class="inner">
+    <div class="toggle menu">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="list menu">
+      <li class="item">
+        <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+      </li>
+    </ul>
+    <div class="right menu">
+      <div class="search-btn">
+        <i class="ic i-search ic-lg"></i>
+      </div>
+      <div class="back-to-top">
+        <i class="ic i-arrow-up"></i>
+        <span>0%</span>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="brand">
+  <div class="meta">
+    <a href="/" class="logo" rel="start">
+      <span class="artboard"></span>
+      <h1 class="title">Vain的博客</h1>
+    </a>
+    <p class="subtitle" itemprop="description">= Vain学习(C/C++ acm算法 python Linux Golang)的个人网站 =</p>
+  </div>
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#gentle-wave" x="48" y="0" />
+      <use xlink:href="#gentle-wave" x="48" y="3" />
+      <use xlink:href="#gentle-wave" x="48" y="5" />
+      <use xlink:href="#gentle-wave" x="48" y="7" />
+    </g>
+  </svg>
+</div>
+<div class="search">
+  <div class="inner">
+    <div class="header">
+      <span class="icon">
+        <i class="ic i-search"></i>
+      </span>
+      <div class="search-input-container"></div>
+      <span class="close-btn">
+        <i class="ic i-times-circle"></i>
+      </span>
+    </div>
+    <div class="results">
+      <div class="inner">
+        <div id="search-stats"></div>
+        <div id="search-hits"></div>
+        <div id="search-pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <ul class="lozad">
+        <li data-background-image="/images/banner/1.jpg"></li>
+        <li data-background-image="/images/banner/2.jpg"></li>
+        <li data-background-image="/images/banner/3.jpg"></li>
+        <li data-background-image="/images/banner/4.jpg"></li>
+        <li data-background-image="/images/banner/5.jpg"></li>
+        <li data-background-image="/images/banner/6.jpg"></li>
+      </ul>
+    </header>
+    <main>
+      <div class="inner">
+        <div class="content pjax">
+          
+  <div class="article wrap">
+    <div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <i class="ic i-home"></i>
+  <span>
+    <a href="/">Home</a>
+  </span>
+</div>
+
+<article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="https://vain-articles.github.io/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="name" content="Vain">
+    <meta itemprop="description" content="Vain学习(C/C++ acm算法 python Linux Golang)的个人网站算法 C/C++ Python Linux Golang">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Vain的博客">
+  </span>
+    <header>
+
+      <h1 class="title" itemprop="name headline">
+        Leetcode 1438. 绝对差不超过限制的最长连续子数组
+      </h1>
+
+      <div class="meta">
+        <span class="item" title="Created: 2020-05-09 22:07:59">
+          <span class="icon">
+            <i class="ic i-calendar"></i>
+          </span>
+          <span class="text">Posted on</span>
+          <time itemprop="dateCreated datePublished" datetime="2020-05-09T22:07:59+08:00">2020-05-09</time>
+        </span>
+      </div>
+        <div class="tags">
+            <a href="/tags/leetcode/" rel="tag"><i class="ic i-tag"></i> leetcode</a>
+        </div>
+    </header>
+
+  
+  
+  
+  <div class="body" itemprop="articleBody">
+    
+
+    <p><span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS1jbi5jb20vcHJvYmxlbXMvbG9uZ2VzdC1jb250aW51b3VzLXN1YmFycmF5LXdpdGgtYWJzb2x1dGUtZGlmZi1sZXNzLXRoYW4tb3ItZXF1YWwtdG8tbGltaXQv">传送门：</span></p>
 <p><strong>题意：</strong> </p>
 <blockquote>
 <p>给长度为 n 的序列 和 限制值 k，求最长的子区间，子区间满足区间中任意两个数的差的绝对值不大于k</p>
@@ -14,49 +187,228 @@
 
 <p><strong>参考代码：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> ans;</span><br><span class="line"><span class="keyword">int</span> q1[<span class="number">100005</span>], q2[<span class="number">100005</span>], a[<span class="number">100005</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solv</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> head1 = <span class="number">0</span>, tail1 = -<span class="number">1</span>, head2 = <span class="number">0</span>, tail2 = -<span class="number">1</span>, res = <span class="number">0</span>, l = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (head1 &lt;= tail1 &amp;&amp; a[q1[tail1]] &gt;=a[i])</span><br><span class="line">            tail1--;</span><br><span class="line">        <span class="keyword">while</span> (head2 &lt;= tail2 &amp;&amp; a[q2[tail2]] &lt;=a[i])</span><br><span class="line">            tail2--;</span><br><span class="line">        <span class="keyword">while</span> (head1 &lt;= tail1 &amp;&amp; q1[head1] &lt; l)</span><br><span class="line">            head1++;</span><br><span class="line">        <span class="keyword">while</span> (head2 &lt;= tail2 &amp;&amp; q2[head2] &lt; l)</span><br><span class="line">            head2++; </span><br><span class="line">        q1[++tail1] = i;</span><br><span class="line">        q2[++tail2] = i;</span><br><span class="line">        <span class="keyword">if</span> (a[q2[head2]] - a[q1[head1]] &lt;= k)</span><br><span class="line">            res = max(res, i - l + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            l++;</span><br><span class="line">    &#125;</span><br><span class="line">    ans=res;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">longestSubarray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> limit)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">int</span> n=nums.size();</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)</span><br><span class="line">      a[i]=nums[i];</span><br><span class="line">      solv(n,limit); </span><br><span class="line">      <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</div><ul class="post-copyright"><li><strong>Post Title: </strong><a href="https://Vain-articles.github.io/2020/05/09/leetcode-1438-绝对差不超过限制的最长连续子数组/">Leetcode 1438. 绝对差不超过限制的最长连续子数组</a></li><li><strong>Post Author: </strong><a href="https://Vain-articles.github.io">Vain</a></li><li><strong>Post Link: </strong><a href="https://Vain-articles.github.io/2020/05/09/leetcode-1438-绝对差不超过限制的最长连续子数组/">https://Vain-articles.github.io/2020/05/09/leetcode-1438-绝对差不超过限制的最长连续子数组/</a></li><li><strong>Copyright Notice: </strong><span>All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> unless stating additionally.</span></li></ul><div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># Related Post</span><br><span>  1.<a class="is-size-6" href="/2020/05/16/%E6%B4%9B%E8%B0%B7-P4309-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%B9%B3%E8%A1%A1%E6%A0%91%E7%BB%B4%E6%8A%A4%EF%BC%89/" target="_blank">洛谷 P4309 最长上升子序列（平衡树维护）</a><br></span><span>  2.<a class="is-size-6" href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" target="_blank">Leetcode 三数之和</a><br></span><span>  3.<a class="is-size-6" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" target="_blank">bbb群主的快读板子</a><br></span><span>  4.<a class="is-size-6" href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/" target="_blank">文艺平衡树</a><br></span><span>  5.<a class="is-size-6" href="/2020/05/05/AtCoder-4351%E5%89%8D%E7%BC%80%E5%92%8C-%E4%BA%8C%E5%88%86-%E6%B1%82%E9%A1%BA%E5%BA%8F%E5%AF%B9%E6%95%B0/" target="_blank">AtCoder 4351前缀和+二分+求顺序对数</a><br></span><span>  6.<a class="is-size-6" href="/2020/05/03/SPOJ-DQUERY-%E4%B8%BB%E5%B8%AD%E6%A0%91/" target="_blank">SPOJ DQUERY(主席树)</a><br></span><span>  7.<a class="is-size-6" href="/2020/05/02/Fhq-treap/" target="_blank">Fhq treap</a><br></span><span>  8.<a class="is-size-6" href="/2020/05/01/%E6%9B%BF%E7%BD%AA%E7%BE%8A%E6%A0%91%E6%A8%A1%E6%9D%BF/" target="_blank">替罪羊树模板</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">Like this article? Support the author with</h3><div class="buttons is-centered"><a class="button is-info donate"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>Alipay</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135456.png" alt="Alipay"></span></a><a class="button is-success donate"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>Wechat</span><span class="qrcode"><img src="https://raw.githubusercontent.com/removeif/blog_image/master/img/2019/20190802135550.png" alt="Wechat"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Leetcode 三数之和</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/"><span class="level-item">bbb群主的快读板子</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1 is-sticky"><!--!--><div class="card widget"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="is-rounded" src="/img/avatar.png" alt="Vain"></figure><p class="title is-size-4 is-block line-height-inherit">Vain</p><p class="is-size-6 is-block">千里之行，始于足下</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>China</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Posts</p><a href="/archives"><p class="title">17</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Categories</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">2</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/Vain-Algorithm/Vain-Algorithm.github.io" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/removeif"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/u/3050419984"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:removeif@163.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="Next" href="https://vain-algorithm.github.io/"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-white is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
-                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
-                                if(data){
-                                    $('#hitokoto').html("");
-                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
-                                    "<p>"+"From《"+data.from+"》</p><p>Provider-"+data.creator+"</p>");
-                                }});}
-                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">Recent</h3><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-16T02:27:51.000Z">2020-05-16</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/16/%E6%B4%9B%E8%B0%B7-P4309-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%EF%BC%88%E5%B9%B3%E8%A1%A1%E6%A0%91%E7%BB%B4%E6%8A%A4%EF%BC%89/">洛谷 P4309 最长上升子序列（平衡树维护）</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-11T14:14:50.000Z">2020-05-11</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">Leetcode 三数之和</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-09T14:07:59.000Z">2020-05-09</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/">Leetcode 1438. 绝对差不超过限制的最长连续子数组</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-08T13:49:03.000Z">2020-05-08</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/">bbb群主的快读板子</a></p><p class="is-uppercase"></p></div></article><article class="media"><div class="media-content size-small"><p><time dateTime="2020-05-07T13:17:17.000Z">2020-05-07</time></p><p class="title is-6"><a class="link-muted" href="/2020/05/07/%E6%96%87%E8%89%BA%E5%B9%B3%E8%A1%A1%E6%A0%91/">文艺平衡树</a></p><p class="is-uppercase"></p></div></article></div></div><!--!--><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/05/"><span class="level-start"><span class="level-item">May 2020</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/04/"><span class="level-start"><span class="level-item">April 2020</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/ACM%E7%AE%97%E6%B3%95/"><span class="tag">ACM算法</span><span class="tag is-grey-lightest">13</span></a></div><div class="control"><a class="tags has-addons" href="/tags/leetcode/"><span class="tag">leetcode</span><span class="tag is-grey-lightest">3</span></a></div></div></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe to Updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=removeifFeedsId&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="removeifFeedsId" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button is-primary" type="submit" value="Subscribe"></div></div><p class="help">输入邮箱开始订阅，更博后邮件通知！</p></form></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="Vain的博客" height="28"></a><p class="size-small"><span>&copy; 2020 Vain</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>,Modify by <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">removeif</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请<a href="/message" target="_blank">留言</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
-            var n = new Date(time);
-            now.setTime(now.getTime() + 250),
-                days = (now - n) / 1e3 / 60 / 60 / 24,
-                dnum = Math.floor(days),
-                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
-                hnum = Math.floor(hours),
-            1 == String(hnum).length && (hnum = "0" + hnum),
-                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
-                mnum = Math.floor(minutes),
-            1 == String(mnum).length && (mnum = "0" + mnum),
-                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
-                snum = Math.round(seconds),
-            1 == String(snum).length && (snum = "0" + snum),
-                document.getElementById("statistic-times").innerHTML = "❤️Site from <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> has existed <strong>" + dnum + "</strong> d <strong>" + hnum + "</strong> h <strong>" + mnum + "</strong> m <strong>" + snum + "</strong> s！❤️";
-        }var now = new Date();setInterval("createTime('2018/11/11 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️Thx <strong><span id="busuanzi_value_site_uv">99+</span></strong> users <strong><span id="busuanzi_value_site_pv">99+</span></strong> visited！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/removeif"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="2364053447" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
-            site: {
-                url: 'https://Vain-articles.github.io',
-                external_link: {"enable":true,"exclude":[]}
-            },
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" defer></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to Top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back-to-top.js" defer></script><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.12/js/lightgallery-all.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><!--!--><!--!--><!--!--><script src="/js/toc.js" defer></script><script src="/js/main.js" defer></script><link rel="stylesheet" href="/css/insight.css"><div class="searchbox ins-search"><div class="searchbox-container ins-search-container"><div class="searchbox-input-wrapper"><input class="searchbox-input ins-search-input" type="text" placeholder="Type something..."><span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span></div><div class="searchbox-result-wrapper ins-section-wrapper"><div class="ins-section-container"></div></div></div></div><script>(function (window) {
-            var INSIGHT_CONFIG = {
-                TRANSLATION: {
-                    POSTS: 'Posts',
-                    PAGES: 'Pages',
-                    CATEGORIES: 'Categories',
-                    TAGS: 'Tags',
-                    UNTITLED: '(Untitled)',
-                },
-                CONTENT_URL: '/content.json',
-            };
-            window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-        })(window);</script><script src="/js/insight.js" defer></script></body></html>
+
+  </div>
+
+  
+  
+  
+
+  
+   <footer>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>give me a cup of coffee</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Vain WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Vain Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Vain PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright" class="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Vain @Vain的博客
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="https://vain-articles.github.io/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/" title="Leetcode 1438. 绝对差不超过限制的最长连续子数组">https://vain-articles.github.io/2020/05/09/leetcode-1438-绝对差不超过限制的最长连续子数组/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+    
+
+  </footer>
+
+  
+</article>
+  
+  
+  
+
+  </div>
+  <div class="nav">
+  <div class="inner">
+    <div class="item">
+      <a href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" rel="prev">
+        <i class="ic i-chevron-left"></i> Previous Post
+      </a>
+    </div>
+    <div class="item">
+      <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" rel="next">
+        Next Post <i class="ic i-chevron-right"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+  <div class="comments wrap" id="comments" data-id="9068a08f8af52a835b033117f3dc4403"></div>
+
+        </div>
+        <div class="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Vain"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Vain</p>
+  <div class="description" itemprop="description">算法 C/C++ Python Linux Golang</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <span class="count">17</span>
+      <span class="name">posts</span>
+    </div>
+    <div class="item tags">
+      <span class="count">2</span>
+      <span class="name">tags</span>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lvdXJuYW1l" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b3VybmFtZQ==" title="https:&#x2F;&#x2F;twitter.com&#x2F;yourname"><i class="ic i-twitter"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3VybmFtZQ==" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;yourname"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item music" data-url="aHR0cHM6Ly9tdXNpYy4xNjMuY29tLyMvdXNlci9ob21lP2lkPXlvdXJpZA==" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;yourid"><i class="ic i-cloud-music"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jb20veW91cm5hbWU=" title="https:&#x2F;&#x2F;weibo.com&#x2F;yourname"><i class="ic i-weibo"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS95b3VybmFtZQ==" title="https:&#x2F;&#x2F;about.me&#x2F;yourname"><i class="ic i-address-card"></i></span>
+</div>
+
+
+<ul class="menu">
+    <li class="item">
+      <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+    </li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul class="quick">
+    <li class="prev pjax">
+        <a href="/2020/05/08/bbb%E7%BE%A4%E4%B8%BB%E7%9A%84%E5%BF%AB%E8%AF%BB%E6%9D%BF%E5%AD%90/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2020/05/11/leetcode-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="inner">
+        <div class="copyright">
+  
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="ic i-sakura rotate"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vain @ Vain的博客</span>
+</div>
+
+<div class="powered-by">
+  Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+</div>
+
+      </div>
+    </footer>
+  </div>
+
+<script data-config type="text/javascript">
+  var CONFIG = {
+    hostname  : "vain-articles.github.io",
+    root: "/",
+    statics: "/",
+    favicon: {
+      normal: "images/favicon.ico",
+      hidden: "images/failure.ico",
+      show: "（●´3｀●）",
+      hide: "(´Д｀)"
+    },
+    valine: "npm/valine@1.4.14/dist/Valine.min.js",
+    comments    : {
+      appId      : "Your_appId",
+      appKey     : "Your_appkey",
+      placeholder: "ヽ(○´∀`)ﾉ♪",
+      avatar     : "mm",
+      pageSize   : 10,
+      visitor    : true,
+      lang       : "zh-cn",
+      recordIP   : true,
+      serverURLs : ""
+    },
+    mediumzoom: "npm/medium-zoom@1.0.5/dist/medium-zoom.min.js",
+    search : {
+      appID    : "",
+      apiKey   : "",
+      indexName: "",
+      hits     : {"per_page":10},
+      labels   : {"input_placeholder":"文章搜索","hits_empty":"关于 ${query} ，什么也没搜到","hits_stats":"${time} ms 内找到 ${hits} 条结果"}
+    },
+    quicklink: {
+      timeout : 3000,
+      priority: true,
+      ignores : [
+        function(uri) {
+          return uri.includes('#');
+        },
+        function(uri) {
+          return uri === 'https://vain-articles.github.io/2020/05/09/leetcode-1438-%E7%BB%9D%E5%AF%B9%E5%B7%AE%E4%B8%8D%E8%B6%85%E8%BF%87%E9%99%90%E5%88%B6%E7%9A%84%E6%9C%80%E9%95%BF%E8%BF%9E%E7%BB%AD%E5%AD%90%E6%95%B0%E7%BB%84/';
+        }
+      ]
+    }
+  };
+</script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/velocity-animate@1.5.2/velocity.min.js,npm/velocity-animate@1.5.2/velocity.ui.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+</html>
