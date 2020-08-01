@@ -1,0 +1,410 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="Vain的博客" href="https://vain-articles.github.io/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="Vain的博客" href="https://vain-articles.github.io/atom.xml" />
+<link rel="alternate" type="application/json" title="Vain的博客" href="https://vain-articles.github.io/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Noto Serif JP:300,300italic,400,400italic,700,700italic|Inconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+
+<link rel="stylesheet" href="/css/app.css">
+
+
+  
+  <meta name="keywords" content="ACM算法" />
+
+
+
+<meta name="description" content="算法 C/C++ Python Linux Golang" >
+
+
+<link rel="canonical" href="https://vain-articles.github.io/2020/08/01/HDU-%E5%A4%9A%E6%A0%A1%E8%81%94%E8%B5%9B%E7%AC%AC%E5%9B%9B%E5%9C%BA-Deliver-the-Cake/">
+
+
+
+  <title>
+HDU 多校联赛第四场 Deliver the Cake |
+Vain的博客 = Vain学习(C/C++ acm算法 python Linux Golang)的个人网站</title>
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="body"></div>
+      <div class="tail"></div>
+      <div class="head"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <header itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <nav>
+  <div class="inner">
+    <div class="toggle menu">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="list menu">
+      <li class="item">
+        <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+      </li>
+    </ul>
+    <div class="right menu">
+      <div class="search-btn">
+        <i class="ic i-search ic-lg"></i>
+      </div>
+      <div class="back-to-top">
+        <i class="ic i-arrow-up"></i>
+        <span>0%</span>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="brand">
+  <div class="meta">
+    <a href="/" class="logo" rel="start">
+      <span class="artboard"></span>
+      <h1 class="title">Vain的博客</h1>
+    </a>
+    <p class="subtitle" itemprop="description">= Vain学习(C/C++ acm算法 python Linux Golang)的个人网站 =</p>
+  </div>
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+      <use xlink:href="#gentle-wave" x="48" y="0" />
+      <use xlink:href="#gentle-wave" x="48" y="3" />
+      <use xlink:href="#gentle-wave" x="48" y="5" />
+      <use xlink:href="#gentle-wave" x="48" y="7" />
+    </g>
+  </svg>
+</div>
+<div class="search">
+  <div class="inner">
+    <div class="header">
+      <span class="icon">
+        <i class="ic i-search"></i>
+      </span>
+      <div class="search-input-container"></div>
+      <span class="close-btn">
+        <i class="ic i-times-circle"></i>
+      </span>
+    </div>
+    <div class="results">
+      <div class="inner">
+        <div id="search-stats"></div>
+        <div id="search-hits"></div>
+        <div id="search-pagination"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      </div>
+      <ul class="lozad">
+        <li data-background-image="/images/banner/1.jpg"></li>
+        <li data-background-image="/images/banner/2.jpg"></li>
+        <li data-background-image="/images/banner/3.jpg"></li>
+        <li data-background-image="/images/banner/4.jpg"></li>
+        <li data-background-image="/images/banner/5.jpg"></li>
+        <li data-background-image="/images/banner/6.jpg"></li>
+      </ul>
+    </header>
+    <main>
+      <div class="inner">
+        <div class="content pjax">
+          
+  <div class="article wrap">
+    <div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <i class="ic i-home"></i>
+  <span>
+    <a href="/">Home</a>
+  </span>
+</div>
+
+<article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="https://vain-articles.github.io/2020/08/01/HDU-%E5%A4%9A%E6%A0%A1%E8%81%94%E8%B5%9B%E7%AC%AC%E5%9B%9B%E5%9C%BA-Deliver-the-Cake/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.gif">
+    <meta itemprop="name" content="Vain">
+    <meta itemprop="description" content="Vain学习(C/C++ acm算法 python Linux Golang)的个人网站算法 C/C++ Python Linux Golang">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Vain的博客">
+  </span>
+    <header>
+
+      <h1 class="title" itemprop="name headline">
+        HDU 多校联赛第四场 Deliver the Cake
+      </h1>
+
+      <div class="meta">
+        <span class="item" title="Created: 2020-08-01 23:07:43">
+          <span class="icon">
+            <i class="ic i-calendar"></i>
+          </span>
+          <span class="text">Posted on</span>
+          <time itemprop="dateCreated datePublished" datetime="2020-08-01T23:07:43+08:00">2020-08-01</time>
+        </span>
+      </div>
+        <div class="tags">
+            <a href="/tags/ACM%E7%AE%97%E6%B3%95/" rel="tag"><i class="ic i-tag"></i> ACM算法</a>
+        </div>
+    </header>
+
+  
+  
+  
+  <div class="body" itemprop="articleBody">
+    
+
+    <p>由于之前不会堆优化版本的dijstra，只会spfa算法，然后补题的时候想着用spfa算法过，没想到被卡了，所以去学了一手dijstra</p>
+<p>这里讲一下两种算法的时间复杂度：<br>spfa:核心思想 bfs，时间复杂度，不好证明，这算法写起来挺简单的，跑随机图飞快，但出题人刻意卡的话，那这个算法就不行了。<br>dijstra: 核心思想贪心，时间复杂度On(logn)，用了优先队列，优化了普通dijstra找最小点距的位置</p>
+<a id="more"></a>
+<p>Deliver the Cake</p>
+<p>思路：<br>由于有M的存在，图的就出现了多种可能性，所以我们需要把这些可能性考虑出来，然后将M点拆开，然后建图，M有L R两种可能，所以我们就需要考虑当M为L|R时，图的边权值了，这里我们可以将M为$R$时的点映射为R(u)+n，然后还有一种情况，若起始点为M，或终点为M时，我们将起始点设置为0，终点设置为(2n+1)，这样就不会影响拆点。</p>
+<p><strong>拆点代码</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ((dir[u] == <span class="string">'L'</span> &amp;&amp; dir[v] == <span class="string">'R'</span>) || (dir[u] == <span class="string">'R'</span> &amp;&amp; dir[v] == <span class="string">'L'</span>))</span><br><span class="line">        addT(u, v, w + x);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ((dir[u] == <span class="string">'L'</span> &amp;&amp; dir[v] == <span class="string">'L'</span>) || (dir[u] == <span class="string">'R'</span> &amp;&amp; dir[v] == <span class="string">'R'</span>))</span><br><span class="line">        addT(u, v, w);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'M'</span> &amp;&amp; dir[v] == <span class="string">'L'</span>)</span><br><span class="line">        addT(u, v, w), addT(u + n, v, w + x);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'M'</span> &amp;&amp; dir[v] == <span class="string">'R'</span>)</span><br><span class="line">        addT(u + n, v, w), addT(u, v, w + x);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'L'</span> &amp;&amp; dir[v] == <span class="string">'M'</span>)</span><br><span class="line">        addT(u, v, w), addT(u, v + n, w + x);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'R'</span> &amp;&amp; dir[v] == <span class="string">'M'</span>)</span><br><span class="line">        addT(u, v + n, w), addT(u, v, w + x);</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ((dir[u] == <span class="string">'M'</span> &amp;&amp; dir[v] == <span class="string">'M'</span>))</span><br><span class="line">        addT(u, v, w), addT(u + n, v + n, w), addT(u, v + n, w + x), addT(u + n, v, w + x);</span><br></pre></td></tr></table></figure>
+
+<p><strong>参考代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctime&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">//typedef long long ll;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e3</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">2e6</span> + <span class="number">20</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">int</span> inv[maxn], dp[maxn], vis[maxn], dis[maxn];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; p;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">max</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a &gt; b ? a : b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a &lt; b ? a : b; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> b ? gcd(b, a % b) : a; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcm</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a * b / gcd(a, b); &#125;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, w, nex;</span><br><span class="line">&#125; edge[maxn];</span><br><span class="line"><span class="keyword">int</span> cnt, head[maxn], x, s, t, n, m;</span><br><span class="line"><span class="keyword">char</span> dir[maxn];</span><br><span class="line">priority_queue&lt;p, <span class="built_in">vector</span>&lt;p&gt;, greater&lt;p&gt; &gt; q;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    edge[cnt].w = w, edge[cnt].v = v, edge[cnt].nex = head[u];</span><br><span class="line">    head[u] = cnt++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addT</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    add(u, v, w), add(v, u, w);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dij</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span> vis);</span><br><span class="line">    <span class="built_in">memset</span>(dis, <span class="number">0x3f3f3f3f</span>, <span class="keyword">sizeof</span> dis);</span><br><span class="line">    <span class="keyword">if</span> (dir[s] == <span class="string">'M'</span>)</span><br><span class="line">        q.push(&#123;<span class="number">0</span>, <span class="number">0</span>&#125;), dis[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        q.push(&#123;<span class="number">0</span>, s&#125;), dis[s] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        p t = q.top();</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">int</span> u = t.second;</span><br><span class="line">        <span class="keyword">if</span> (vis[u])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        vis[u] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; ~i; i = edge[i].nex)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> v = edge[i].v, w = edge[i].w;</span><br><span class="line">            <span class="keyword">if</span> (dis[v] &gt; dis[u] + w)</span><br><span class="line">            &#123;</span><br><span class="line">                dis[v] = dis[u] + w;</span><br><span class="line">                q.push(&#123;dis[v], v&#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dir[t] == <span class="string">'M'</span>)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dis[<span class="number">2</span> * n + <span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; dis[t] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(head, <span class="number">-1</span>, <span class="keyword">sizeof</span> head);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">int</span> q, u, v, w;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; q;</span><br><span class="line">    <span class="keyword">while</span> (q--)</span><br><span class="line">    &#123;</span><br><span class="line">        init();</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m &gt;&gt; s &gt;&gt; t &gt;&gt; x;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; (dir + <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (dir[s] == <span class="string">'M'</span>)</span><br><span class="line">            addT(s, <span class="number">0</span>, <span class="number">0</span>), addT(<span class="number">0</span>, s + n, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (dir[t] == <span class="string">'M'</span>)</span><br><span class="line">            addT(t, <span class="number">2</span> * n + <span class="number">1</span>, <span class="number">0</span>), addT(t + n, <span class="number">2</span> * n + <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">            <span class="keyword">if</span> ((dir[u] == <span class="string">'L'</span> &amp;&amp; dir[v] == <span class="string">'R'</span>) || (dir[u] == <span class="string">'R'</span> &amp;&amp; dir[v] == <span class="string">'L'</span>))</span><br><span class="line">                addT(u, v, w + x);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> ((dir[u] == <span class="string">'L'</span> &amp;&amp; dir[v] == <span class="string">'L'</span>) || (dir[u] == <span class="string">'R'</span> &amp;&amp; dir[v] == <span class="string">'R'</span>))</span><br><span class="line">                addT(u, v, w);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'M'</span> &amp;&amp; dir[v] == <span class="string">'L'</span>)</span><br><span class="line">                addT(u, v, w), addT(u + n, v, w + x);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'M'</span> &amp;&amp; dir[v] == <span class="string">'R'</span>)</span><br><span class="line">                addT(u + n, v, w), addT(u, v, w + x);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'L'</span> &amp;&amp; dir[v] == <span class="string">'M'</span>)</span><br><span class="line">                addT(u, v, w), addT(u, v + n, w + x);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (dir[u] == <span class="string">'R'</span> &amp;&amp; dir[v] == <span class="string">'M'</span>)</span><br><span class="line">                addT(u, v + n, w), addT(u, v, w + x);</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> ((dir[u] == <span class="string">'M'</span> &amp;&amp; dir[v] == <span class="string">'M'</span>))</span><br><span class="line">                addT(u, v, w), addT(u + n, v + n, w), addT(u, v + n, w + x), addT(u + n, v, w + x);</span><br><span class="line">        &#125;</span><br><span class="line">        dij();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+
+  
+  
+  
+
+  
+   <footer>
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>give me a cup of coffee</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="Vain WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="Vain Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="Vain PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright" class="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>Vain @Vain的博客
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="https://vain-articles.github.io/2020/08/01/HDU-%E5%A4%9A%E6%A0%A1%E8%81%94%E8%B5%9B%E7%AC%AC%E5%9B%9B%E5%9C%BA-Deliver-the-Cake/" title="HDU 多校联赛第四场 Deliver the Cake">https://vain-articles.github.io/2020/08/01/HDU-多校联赛第四场-Deliver-the-Cake/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+
+    
+
+  </footer>
+
+  
+</article>
+  
+  
+  
+
+  </div>
+  <div class="nav">
+  <div class="inner">
+    <div class="item">
+      <a href="/2020/07/31/Codeforces-Round-660-Div-2/" rel="prev">
+        <i class="ic i-chevron-left"></i> Previous Post
+      </a>
+    </div>
+    <div class="item">
+    </div>
+  </div>
+</div>
+
+  <div class="comments wrap" id="comments" data-id="554610c2adf4c1613d07f11d3d16cda1"></div>
+
+        </div>
+        <div class="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="Vain"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">Vain</p>
+  <div class="description" itemprop="description">算法 C/C++ Python Linux Golang</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <span class="count">19</span>
+      <span class="name">posts</span>
+    </div>
+    <div class="item tags">
+      <span class="count">3</span>
+      <span class="name">tags</span>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3lvdXJuYW1l" title="https:&#x2F;&#x2F;github.com&#x2F;yourname"><i class="ic i-github"></i></span>
+      <span class="exturl item twitter" data-url="aHR0cHM6Ly90d2l0dGVyLmNvbS95b3VybmFtZQ==" title="https:&#x2F;&#x2F;twitter.com&#x2F;yourname"><i class="ic i-twitter"></i></span>
+      <span class="exturl item zhihu" data-url="aHR0cHM6Ly93d3cuemhpaHUuY29tL3Blb3BsZS95b3VybmFtZQ==" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;yourname"><i class="ic i-zhihu"></i></span>
+      <span class="exturl item music" data-url="aHR0cHM6Ly9tdXNpYy4xNjMuY29tLyMvdXNlci9ob21lP2lkPXlvdXJpZA==" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;yourid"><i class="ic i-cloud-music"></i></span>
+      <span class="exturl item weibo" data-url="aHR0cHM6Ly93ZWliby5jb20veW91cm5hbWU=" title="https:&#x2F;&#x2F;weibo.com&#x2F;yourname"><i class="ic i-weibo"></i></span>
+      <span class="exturl item about" data-url="aHR0cHM6Ly9hYm91dC5tZS95b3VybmFtZQ==" title="https:&#x2F;&#x2F;about.me&#x2F;yourname"><i class="ic i-address-card"></i></span>
+</div>
+
+
+<ul class="menu">
+    <li class="item">
+      <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+    </li>
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul class="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="inner">
+        <div class="copyright">
+  
+  &copy; 2010 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="ic i-sakura rotate"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vain @ Vain的博客</span>
+</div>
+
+<div class="powered-by">
+  Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+</div>
+
+      </div>
+    </footer>
+  </div>
+
+<script data-config type="text/javascript">
+  var CONFIG = {
+    hostname  : "vain-articles.github.io",
+    root: "/",
+    statics: "/",
+    favicon: {
+      normal: "images/favicon.ico",
+      hidden: "images/failure.ico",
+      show: "（●´3｀●）",
+      hide: "(´Д｀)"
+    },
+    valine: "npm/valine@1.4.14/dist/Valine.min.js",
+    comments    : {
+      appId      : "Your_appId",
+      appKey     : "Your_appkey",
+      placeholder: "ヽ(○´∀`)ﾉ♪",
+      avatar     : "mm",
+      pageSize   : 10,
+      visitor    : true,
+      lang       : "zh-cn",
+      recordIP   : true,
+      serverURLs : ""
+    },
+    mediumzoom: "npm/medium-zoom@1.0.5/dist/medium-zoom.min.js",
+    search : {
+      appID    : "",
+      apiKey   : "",
+      indexName: "",
+      hits     : {"per_page":10},
+      labels   : {"input_placeholder":"文章搜索","hits_empty":"关于 ${query} ，什么也没搜到","hits_stats":"${time} ms 内找到 ${hits} 条结果"}
+    },
+    quicklink: {
+      timeout : 3000,
+      priority: true,
+      ignores : [
+        function(uri) {
+          return uri.includes('#');
+        },
+        function(uri) {
+          return uri === 'https://vain-articles.github.io/2020/08/01/HDU-%E5%A4%9A%E6%A0%A1%E8%81%94%E8%B5%9B%E7%AC%AC%E5%9B%9B%E5%9C%BA-Deliver-the-Cake/';
+        }
+      ]
+    }
+  };
+</script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/velocity-animate@1.5.2/velocity.min.js,npm/velocity-animate@1.5.2/velocity.ui.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+</body>
+</html>
